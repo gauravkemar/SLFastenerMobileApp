@@ -75,6 +75,6 @@ dependencies {
 
     implementation ("com.github.f0ris.sweetalert:library:1.6.2")
     implementation ("com.github.mik3y:usb-serial-for-android:3.7.0")
-
+    implementation ("com.symbol:emdk:7.6.10")
 
 }
