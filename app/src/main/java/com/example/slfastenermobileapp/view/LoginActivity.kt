@@ -46,15 +46,13 @@ class LoginActivity : AppCompatActivity() {
 
         if (Utils.getSharedPrefsBoolean(this@LoginActivity, Constants.KEY_ISLOGGEDIN, false)) {
             if(Utils.getSharedPrefsBoolean(this@LoginActivity, Constants.KEY_ISLOGGEDIN, true)) {
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                startActivity(Intent(this@LoginActivity, homeActivity::class.java))
                 finish()
             }
         }
         binding.mcvLogin.setOnClickListener {
             login()
         }
-
-
 
         viewModel.loginMutableLiveData.observe(this) { response ->
             when (response) {

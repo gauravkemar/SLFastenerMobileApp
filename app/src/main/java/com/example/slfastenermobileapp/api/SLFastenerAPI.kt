@@ -5,6 +5,9 @@ package  com.example.demorfidapp.api
 
 
 import com.example.slfastenermobileapp.helper.Constants.LOGIN_URL
+import com.example.slfastenermobileapp.helper.Constants.PUT_AWAY
+import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
+import com.example.slfastenermobileapp.model.generalresponserequest.GeneralResponse
 import com.example.slfastenermobileapp.model.login.LoginRequest
 import com.example.slfastenermobileapp.model.login.LoginResponse
 
@@ -20,6 +23,12 @@ interface SLFastenerAPI {
         @Body
         loginRequest: LoginRequest
     ): Response<LoginResponse>
+
+    @POST(PUT_AWAY)
+    suspend fun putAway(
+        @Body
+        generalRequst: GeneralRequst
+    ): Response<ArrayList<GeneralResponse>>
 
 
 

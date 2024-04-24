@@ -36,6 +36,7 @@ object Constants {
 
 
         const val LOGIN_URL = "UserManagement/authenticate"
+        const val PUT_AWAY = "Stock/InitiateStockPutAwayAsync"
 
 
 }

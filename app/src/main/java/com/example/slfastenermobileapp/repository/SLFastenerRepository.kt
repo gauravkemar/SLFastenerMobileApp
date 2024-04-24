@@ -2,6 +2,7 @@ package com.example.slfastenermobileapp.repository
 
 
 import com.example.slfastenermobileapp.api.RetrofitInstance
+import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
 import com.example.slfastenermobileapp.model.login.LoginRequest
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -19,6 +20,12 @@ class SLFastenerRepository {
        baseUrl: String,
        loginRequest: LoginRequest
    ) = RetrofitInstance.api(baseUrl).login(loginRequest)
+
+   suspend fun putAway(
+       baseUrl: String,
+       @Body
+       generalRequst: GeneralRequst
+   ) = RetrofitInstance.api(baseUrl).putAway(generalRequst)
 
 
 

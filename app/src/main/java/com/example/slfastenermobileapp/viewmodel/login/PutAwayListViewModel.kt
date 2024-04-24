@@ -1,4 +1,4 @@
-package com.example.slfastenermobileapp.viewmodel
+package com.example.slfastenermobileapp.viewmodel.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,34 +6,51 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.demorfidapp.helper.Resource
 import com.example.demorfidapp.helper.Utils
-
-
 import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralResponse
-import com.example.slfastenermobileapp.model.login.LoginRequest
-import com.example.slfastenermobileapp.model.login.LoginResponse
 import com.example.slfastenermobileapp.repository.SLFastenerRepository
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
 
-class LoginViewModel (
+class PutAwayListViewModel(
     application: Application,
     private val rfidRepository: SLFastenerRepository
 ) : AndroidViewModel(application) {
-    val loginMutableLiveData: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
-
-    fun login(
+    //////////////////////////////////////////////////DEMO
+    val generalMutable: MutableLiveData<Resource<ArrayList<GeneralResponse>>> = MutableLiveData()
+    fun putAway(
         baseUrl: String,
-        loginRequest: LoginRequest
+        generalRequst: GeneralRequst
     ) {
         viewModelScope.launch {
-            safeAPICallDtmsLogin(baseUrl, loginRequest)
+            safeAPICallPutAway(baseUrl, generalRequst)
         }
     }
 
-    private fun handleDtmsUserLoginResponse(response: Response<LoginResponse>): Resource<LoginResponse> {
+
+
+    private suspend fun safeAPICallPutAway(baseUrl: String,  generalRequst: GeneralRequst) {
+        generalMutable.postValue(Resource.Loading())
+        try {
+            if (Utils.hasInternetConnection(getApplication())) {
+                val response = rfidRepository.putAway(baseUrl, generalRequst)
+                generalMutable.postValue(handlePutAwayResponse(response))
+            } else {
+                generalMutable.postValue(Resource.Error(Constants.NO_INTERNET))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is Exception -> {
+                    generalMutable.postValue(Resource.Error("${t.message}"))
+                }
+                else -> generalMutable.postValue(Resource.Error(Constants.CONFIG_ERROR))
+            }
+        }
+    }
+
+    private fun handlePutAwayResponse(response: Response<ArrayList<GeneralResponse>>): Resource<ArrayList<GeneralResponse>> {
         var errorMessage = ""
         if (response.isSuccessful) {
             response.body()?.let { Response ->
@@ -49,25 +66,4 @@ class LoginViewModel (
         }
         return Resource.Error(errorMessage)
     }
-
-    private suspend fun safeAPICallDtmsLogin(baseUrl: String, loginRequest: LoginRequest) {
-        loginMutableLiveData.postValue(Resource.Loading())
-        try {
-            if (Utils.hasInternetConnection(getApplication())) {
-                val response = rfidRepository.login(baseUrl, loginRequest)
-                loginMutableLiveData.postValue(handleDtmsUserLoginResponse(response))
-            } else {
-                loginMutableLiveData.postValue(Resource.Error(Constants.NO_INTERNET))
-            }
-        } catch (t: Throwable) {
-            when (t) {
-                is Exception -> {
-                    loginMutableLiveData.postValue(Resource.Error("${t.message}"))
-                }
-                else -> loginMutableLiveData.postValue(Resource.Error(Constants.CONFIG_ERROR))
-            }
-        }
-    }
-
-
 }
