@@ -18,7 +18,7 @@ object Constants {
         const val SHARED_PREF = "shared_pref"
         const val LOGGED_IN = "LOGGEDIN"
         const val KEY_ISLOGGEDIN = "isLoggedIn"
-        const val HTTP_ERROR_MESSAGE = "errorMessage"
+        const val HTTP_ERROR_MESSAGE = "message"
         const val KEY_USER_NAME = "userName"
         const val KEY_USER_FIRST_NAME = "firstName"
         const val KEY_USER_LAST_NAME= "lastName"
