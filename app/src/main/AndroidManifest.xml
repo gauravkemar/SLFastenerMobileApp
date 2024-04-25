@@ -23,11 +23,7 @@
         <activity
             android:name=".view.PutawayActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".HomeMenuActivity"
@@ -47,7 +43,11 @@
         <activity
             android:name=".view.LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <uses-library
             android:name="com.symbol.emdk"

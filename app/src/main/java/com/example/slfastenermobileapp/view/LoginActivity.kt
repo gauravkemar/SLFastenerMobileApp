@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.demorfidapp.helper.Resource
 import com.example.demorfidapp.helper.Utils
+import com.example.slfastenermobileapp.HomeMenuActivity
 import com.example.slfastenermobileapp.MainActivity
 import com.example.slfastenermobileapp.R
 import com.example.slfastenermobileapp.helper.Constants
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (Utils.getSharedPrefsBoolean(this@LoginActivity, Constants.KEY_ISLOGGEDIN, false)) {
             if(Utils.getSharedPrefsBoolean(this@LoginActivity, Constants.KEY_ISLOGGEDIN, true)) {
-                startActivity(Intent(this@LoginActivity, homeActivity::class.java))
+                startActivity(Intent(this@LoginActivity, HomeMenuActivity::class.java))
                 finish()
             }
         }
@@ -99,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
     }
     fun startActivity()
     {
-        startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+        startActivity(Intent(this@LoginActivity,HomeMenuActivity::class.java))
         finish()
     }
     private fun clear(){

@@ -1,510 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+<layout>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Db1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/ChooseTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent">
 
-        app:layout_constraintVertical_weight="0.15">
-
-        <ImageView
-            android:id="@+id/Logo1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:adjustViewBounds="true"
-            android:padding="10dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Db1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/ChooseTxt"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/first_logo" />
+
+            app:layout_constraintVertical_weight="0.15">
+
+            <ImageView
+                android:id="@+id/Logo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/first_logo" />
+
+
+            <TextView
+                android:id="@+id/SecoundLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/logouticon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/logouticon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                app:srcCompat="@drawable/dowbarrow" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
-            android:id="@+id/SecoundLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:padding="10dp"
-            android:scaleType="fitXY"
-            android:text="Chandni"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/logouticon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/logouticon"
-            android:layout_width="wrap_content"
+            android:id="@+id/ChooseTxt"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:adjustViewBounds="true"
-            android:padding="10dp"
+            android:padding="5dp"
             android:scaleType="fitXY"
+            android:text="Choose \nyour services"
+            android:textColor="#003D70"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/Db2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Db1"
+            app:layout_constraintVertical_weight="0.10" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Db2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-
-            app:srcCompat="@drawable/dowbarrow" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <TextView
-        android:id="@+id/ChooseTxt"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="10dp"
-        android:scaleType="fitXY"
-        android:text="Choose \nyour services"
-        android:textColor="@color/blueString"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/Db2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Db1"
-        app:layout_constraintVertical_weight="0.10" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Db2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChooseTxt"
-        app:layout_constraintVertical_weight="0.75">
-
-        <!-- First Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-        android:layout_marginTop="2dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@+id/card3"
-            app:layout_constraintEnd_toStartOf="@+id/card2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <!--first card-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!-- Image for First Card -->
-                <ImageView
-                    android:id="@+id/imgcardf"
+            app:layout_constraintTop_toBottomOf="@+id/ChooseTxt"
+            app:layout_constraintVertical_weight="0.75">
+
+            <!-- First Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginTop="2dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toTopOf="@+id/card3"
+                app:layout_constraintEnd_toStartOf="@+id/card2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <!--first card-->
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/putawayimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcardf"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent">
+                    <!-- Image for First Card -->
+                    <ImageView
+                        android:id="@+id/imgcardf"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/putawayimg"
+                        app:layout_constraintBottom_toTopOf="@+id/txtcardf"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Text for First Card -->
-                <TextView
-                    android:id="@+id/txtcardf"
+                    <!-- Text for First Card -->
+                    <TextView
+                        android:id="@+id/txtcardf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="put away"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+
+
+                        app:layout_constraintTop_toBottomOf="@+id/imgcardf" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--secound card-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toTopOf="@+id/card4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/card1"
+                app:layout_constraintTop_toTopOf="parent"
+
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="put away"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="match_parent">
+                    <!-- Image for First Card -->
+                    <ImageView
+                        android:id="@+id/imgcard2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/mergerimg"
+                        app:layout_constraintBottom_toTopOf="@+id/txtcard2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Text for First Card -->
+                    <TextView
+                        android:id="@+id/txtcard2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="merging"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
 
 
-                    app:layout_constraintTop_toBottomOf="@+id/imgcardf" />
+                        app:layout_constraintTop_toBottomOf="@+id/imgcard2" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
-        <!--secound card-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            </com.google.android.material.card.MaterialCardView>
+            <!--third card-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                android:background="#BCCDED"
+                app:layout_constraintBottom_toTopOf="@+id/card5"
+                app:layout_constraintEnd_toStartOf="@+id/card4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card1">
 
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@+id/card4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/card1"
-            app:layout_constraintTop_toTopOf="parent"
-
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!-- Image for First Card -->
-                <ImageView
-                    android:id="@+id/imgcard2"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="match_parent">
 
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/mergerimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcard2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Text for First Card -->
-                <TextView
-                    android:id="@+id/txtcard2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="merging"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-
-
-                    app:layout_constraintTop_toBottomOf="@+id/imgcard2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-        <!--third card-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            android:background="#BCCDED"
-            app:layout_constraintBottom_toTopOf="@+id/card5"
-            app:layout_constraintEnd_toStartOf="@+id/card4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card1">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imgcard1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/splitingimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcard1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/txtcard1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="spliting"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-
-
-                    app:layout_constraintTop_toBottomOf="@+id/imgcard1" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-        <!--     fourth card   -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@+id/card6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/card3"
-            app:layout_constraintTop_toBottomOf="@+id/card2"
-
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!-- Image for First Card -->
-                <ImageView
-                    android:id="@+id/imgcard4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/packingimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcard4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Text for First Card -->
-                <TextView
-                    android:id="@+id/txtcard4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="packing"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-
-
-                    app:layout_constraintTop_toBottomOf="@+id/imgcard4" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-        <!--fifth card-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@+id/card7"
-            app:layout_constraintEnd_toStartOf="@+id/card6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card3"
-
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imgcard5"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/exitclraenceimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcard5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/txtcard5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="exit clearnce"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-
-
-                    app:layout_constraintTop_toBottomOf="@+id/imgcard5" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-        <!--sixth car-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@+id/card8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/card5"
-            app:layout_constraintTop_toBottomOf="@+id/card4">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!-- Image for First Card -->
-                <ImageView
-                    android:id="@+id/imgcard6"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/receivingimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcard6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Text for First Card -->
-                <TextView
-                    android:id="@+id/txtcard6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Receving"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-
-
-                    app:layout_constraintTop_toBottomOf="@+id/imgcard6" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/card8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card5">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!-- Image for First Card -->
-                <ImageView
-                    android:id="@+id/imgcard7"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/pickupimg"
-                    app:layout_constraintBottom_toTopOf="@+id/txtcard7"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/txtcard7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="pick list"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-
-
-                    app:layout_constraintTop_toBottomOf="@+id/imgcard7" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card8"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/card7"
-            app:layout_constraintTop_toBottomOf="@+id/card6"
-
-            >
-
-            <!--    <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                    &lt;!&ndash; Image for First Card &ndash;&gt;
                     <ImageView
                         android:id="@+id/imgcard1"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:scaleType="centerCrop"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/cardimage1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/splitingimg"
                         app:layout_constraintBottom_toTopOf="@+id/txtcard1"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    &lt;!&ndash; Text for First Card &ndash;&gt;
+
                     <TextView
                         android:id="@+id/txtcard1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:text="put away"
+                        android:text="spliting"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -513,13 +250,279 @@
 
                         app:layout_constraintTop_toBottomOf="@+id/imgcard1" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>-->
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+            <!--     fourth card   -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toTopOf="@+id/card6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card3"
+                app:layout_constraintTop_toBottomOf="@+id/card2"
+
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!-- Image for First Card -->
+                    <ImageView
+                        android:id="@+id/imgcard4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/packingimg"
+                        app:layout_constraintBottom_toTopOf="@+id/txtcard4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Text for First Card -->
+                    <TextView
+                        android:id="@+id/txtcard4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="packing"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+
+
+                        app:layout_constraintTop_toBottomOf="@+id/imgcard4" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--fifth card-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toTopOf="@+id/card7"
+                app:layout_constraintEnd_toStartOf="@+id/card6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card3"
+
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imgcard5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/exitclraenceimg"
+                        app:layout_constraintBottom_toTopOf="@+id/txtcard5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/txtcard5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="exit clearnce"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+
+
+                        app:layout_constraintTop_toBottomOf="@+id/imgcard5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--sixth car-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card6"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toTopOf="@+id/card8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card5"
+                app:layout_constraintTop_toBottomOf="@+id/card4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!-- Image for First Card -->
+                    <ImageView
+                        android:id="@+id/imgcard6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/receivingimg"
+                        app:layout_constraintBottom_toTopOf="@+id/txtcard6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Text for First Card -->
+                    <TextView
+                        android:id="@+id/txtcard6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Receving"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+
+
+                        app:layout_constraintTop_toBottomOf="@+id/imgcard6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card7"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/card8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!-- Image for First Card -->
+                    <ImageView
+                        android:id="@+id/imgcard7"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/pickupimg"
+                        app:layout_constraintBottom_toTopOf="@+id/txtcard7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/txtcard7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="pick list"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+
+
+                        app:layout_constraintTop_toBottomOf="@+id/imgcard7" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card8"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                android:visibility="invisible"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card7"
+                app:layout_constraintTop_toBottomOf="@+id/card6"
+
+                >
+
+                <!--    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        &lt;!&ndash; Image for First Card &ndash;&gt;
+                        <ImageView
+                            android:id="@+id/imgcard1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/cardimage1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/txtcard1"
+                            />
+
+                        &lt;!&ndash; Text for First Card &ndash;&gt;
+                        <TextView
+                            android:id="@+id/txtcard1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="put away"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+
+
+                            app:layout_constraintTop_toBottomOf="@+id/imgcard1" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

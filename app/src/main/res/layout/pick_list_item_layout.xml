@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/round_border_grey"
+    android:padding="5dp"
     android:layout_margin="5dp"
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout

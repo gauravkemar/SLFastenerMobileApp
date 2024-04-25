@@ -71,7 +71,7 @@
                 android:scaleType="fitXY"
 
 
-                app:layout_constraintBottom_toTopOf="@+id/searchfield"
+                app:layout_constraintBottom_toTopOf="@+id/edLocText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Logo1"
                 app:srcCompat="@drawable/outline_place_24" />
@@ -85,11 +85,11 @@
                 android:padding="10dp"
                 android:text="location"
                 app:layout_constraintStart_toEndOf="@+id/locationIcn"
-
+                app:layout_constraintBottom_toTopOf="@+id/edLocText"
                 app:layout_constraintTop_toBottomOf="@+id/Logo1" />
 
             <EditText
-                android:id="@+id/searchfield"
+                android:id="@+id/edLocText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -114,10 +114,10 @@
                 android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/scanicon"
-                app:layout_constraintBottom_toBottomOf="@+id/searchfield"
+                app:layout_constraintBottom_toBottomOf="@+id/edLocText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchfield"
-                app:layout_constraintTop_toTopOf="@+id/searchfield" />
+                app:layout_constraintStart_toEndOf="@+id/edLocText"
+                app:layout_constraintTop_toTopOf="@+id/edLocText" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,7 +161,7 @@
                     android:paddingTop="5dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
-                    android:text="Total memeber"
+                    android:text="Total"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/totalCount"
                     app:layout_constraintStart_toEndOf="@+id/ttlMemberIcon"
@@ -172,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:padding="10dp"
-                    android:text="2341"
+                    android:text="0"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +218,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tvGetStarted"
+                    android:id="@+id/tvSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
