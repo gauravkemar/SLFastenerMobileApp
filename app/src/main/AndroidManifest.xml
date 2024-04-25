@@ -26,7 +26,7 @@
 
         </activity>
         <activity
-            android:name=".HomeMenuActivity"
+            android:name=".view.HomeMenuActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

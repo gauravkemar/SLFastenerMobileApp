@@ -152,7 +152,6 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                     response.data?.let { resultResponse ->
                         if (resultResponse != null) {
                             try {
-
                                 if(resultResponse.responseObject!=null)
                                 {
                                     var barcode = resultResponse.responseObject.barcode
@@ -167,15 +166,16 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                                 barcode = resultResponse.responseObject.barcode,
                                                 locationCode = locationCode
                                             )
-                                            if (locationCode != "") {
-                                                putAwayList.add(stockPutAway)
+                                            putAwayList.add(stockPutAway)
+                                            /*if (locationCode != "") {
+
                                             } else {
                                                 Toast.makeText(
                                                     this@PutawayActivity,
                                                     "Location is Empty",
                                                     Toast.LENGTH_LONG
                                                 ).show()
-                                            }
+                                            }*/
 
                                         } else {
                                             Toast.makeText(
@@ -230,6 +230,7 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
+                    clearAll()
                     response.data?.let { resultResponse ->
                         if (resultResponse != null) {
                             try {
@@ -292,6 +293,15 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         }
 
     }
+    private fun clearAll()
+    {
+        binding.edLocText.setText("")
+        locationCode=""
+        stockItemDetails.clear()
+        putAwayList.clear()
+        binding.totalCount.setText("0")
+        putAwayStockItemListAdapter!!.notifyDataSetChanged()
+    }
 
     private fun showProgressBar() {
         progress.show()
@@ -342,10 +352,19 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
     private fun processStockPutAwayList() {
         try {
             if (putAwayList.size > 0) {
-                viewModel.processStockPutAwayList(
-                    token!!, Constants.BASE_URL,
-                    ProcessStockPutAwayListRequest(putAwayList)
-                )
+                if(locationCode!="")
+                {
+                    updateLocationCode(locationCode)
+                    viewModel.processStockPutAwayList(
+                        token!!, Constants.BASE_URL,
+                        ProcessStockPutAwayListRequest(putAwayList)
+                    )
+                    Log.d("putawaylist",putAwayList.toString())
+                }
+                else
+                {
+                    Toasty.warning(this@PutawayActivity, "No Location Found!!").show()
+                }
             } else {
                 Toasty.warning(this@PutawayActivity, "No products Found!!").show()
             }
@@ -427,6 +446,11 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                 }
             }
             Log.e("TAG", "Barcode Data : $dataStr")
+        }
+    }
+    fun updateLocationCode(newLocationCode: String) {
+        putAwayList.forEach { item ->
+            item.locationCode = newLocationCode
         }
     }
 

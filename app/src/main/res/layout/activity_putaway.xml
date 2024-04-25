@@ -206,7 +206,7 @@
             app:cardCornerRadius="20dp"
             android:layout_margin="10dp"
             app:cardBackgroundColor="@color/orange"
-            app:layout_constraintVertical_weight="0.08"
+            app:layout_constraintVertical_weight="0.10"
             app:layout_constraintTop_toBottomOf="@+id/mcvlist"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -4,15 +4,10 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.demorfidapp.helper.Resource
 import com.example.demorfidapp.helper.Utils
-import com.example.slfastenermobileapp.HomeMenuActivity
-import com.example.slfastenermobileapp.MainActivity
 import com.example.slfastenermobileapp.R
 import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.repository.SLFastenerRepository
@@ -100,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
     }
     fun startActivity()
     {
-        startActivity(Intent(this@LoginActivity,HomeMenuActivity::class.java))
+        startActivity(Intent(this@LoginActivity, HomeMenuActivity::class.java))
         finish()
     }
     private fun clear(){
