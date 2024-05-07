@@ -75,6 +75,7 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
         mergeStockLineItem = ArrayList()
         binding.idLayoutHeader.profileTXt.setText(username)
         binding.idLayoutHeader.logouticon.visibility = View.GONE
+        binding.btnSubmitFinal.visibility=View.GONE
 
         viewModel.getStockItemDetailOnBarcodeMutable.observe(this)
         { response ->
@@ -264,9 +265,9 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
             stockItemDetails.clear()
             stockItemDetails.add(tempModel)
             mergeStockItemListAdapter!!.notifyDataSetChanged()
-
-            binding.btnSubmitFinal.visibility=View.VISIBLE
             binding.btnSubmit2.visibility=View.GONE
+            binding.btnSubmitFinal.visibility=View.VISIBLE
+
         }
     }
 
