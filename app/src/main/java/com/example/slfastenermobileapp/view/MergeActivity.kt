@@ -55,7 +55,11 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
     private var mergeStockItemListAdapter: MergeStockItemListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_merge)
+        binding.btnSubmit.visibility = View.GONE
+//
+      binding.btnSubmit2.visibility = View.GONE
         progress = ProgressDialog(this)
         progress.setMessage("Please Wait...")
         val slFastenerRepository = SLFastenerRepository()
@@ -71,6 +75,7 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
         mergeStockLineItem = ArrayList()
         binding.idLayoutHeader.profileTXt.setText(username)
         binding.idLayoutHeader.logouticon.visibility = View.GONE
+
         viewModel.getStockItemDetailOnBarcodeMutable.observe(this)
         { response ->
             when (response) {
@@ -80,8 +85,15 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
                         if (resultResponse != null) {
                             try {
                                 if (resultResponse.responseObject != null) {
+                                    binding.clBodyNoList.visibility = View.GONE
+                                    binding.clBodyList.visibility = View.VISIBLE
+                                    binding.mvView.visibility = View.VISIBLE
+                                    binding.btnSubmit.visibility = View.VISIBLE
+
+                                    binding.btnSubmit2.visibility = View.VISIBLE
+
                                     var barcode = resultResponse.responseObject.barcode
-                                    if (barcode.isNotEmpty()) {
+                                    if (barcode?.isNotEmpty() == true) {
                                         val existingItem =
                                             stockItemDetails.find { it.barcode == resultResponse.responseObject.barcode }
                                         if (existingItem == null) {
@@ -90,9 +102,14 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
                                                 stockItemDetails.size - 1
                                             )
                                             val stockPutAway = MergeStockLineItem(
-                                                resultResponse.responseObject.stockItemId,
+                                                resultResponse.responseObject.stockQty!!.toInt(),
                                             )
                                             mergeStockLineItem.add(stockPutAway)
+                                            Toast.makeText(
+                                                this@MergeActivity,
+                                                "Success",
+                                                Toast.LENGTH_LONG
+                                            ).show()
                                         } else {
                                             Toast.makeText(
                                                 this@MergeActivity,
@@ -210,7 +227,7 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
 
     private fun mergeTheList() {
         if (stockItemDetails.size > 0) {
-            val totalStockQty: Double = stockItemDetails.sumByDouble { it.stockQty }
+            val totalStockQty = stockItemDetails. sumBy{ it.stockQty!! }
             var tempModel = ResponseObjectX(
                 stockItemDetails.get(0).barcode,
                 stockItemDetails.get(0).blockedQty,

@@ -157,18 +157,20 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                 if(resultResponse.responseObject!=null)
                                 {
                                     var barcode = resultResponse.responseObject.barcode
-                                    if (barcode.isNotEmpty()) {
+                                    if (barcode?.isNotEmpty() == true) {
                                         val existingItem =
                                             stockItemDetails.find { it.barcode == resultResponse.responseObject.barcode }
                                         if (existingItem == null) {
                                             stockItemDetails.add(resultResponse.responseObject)
                                             binding.totalCount.setText(stockItemDetails.size.toString())
                                             putAwayStockItemListAdapter?.notifyItemInserted(stockItemDetails.size-1)
-                                            val stockPutAway = StockPutAway(
-                                                barcode = resultResponse.responseObject.barcode,
-                                                locationCode = locationCode
-                                            )
-                                            putAwayList.add(stockPutAway)
+                                            val stockPutAway = resultResponse.responseObject.barcode?.let {
+                                                StockPutAway(
+                                                    barcode = it,
+                                                    locationCode = locationCode
+                                                )
+                                            }
+                                            stockPutAway?.let { putAwayList.add(it) }
                                             /*if (locationCode != "") {
 
                                             } else {

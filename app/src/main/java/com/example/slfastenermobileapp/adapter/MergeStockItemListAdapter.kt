@@ -27,7 +27,7 @@ class MergeStockItemListAdapter(private val stockItemList: MutableList<ResponseO
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.putaway_list_item_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.merge_list_item_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -36,8 +36,8 @@ class MergeStockItemListAdapter(private val stockItemList: MutableList<ResponseO
         val itemPosition = holder.layoutPosition
         val stockItemMod: ResponseObjectX = stockItemList?.get(itemPosition)!!
         holder.tvItemCodeValue.setText(stockItemMod.itemCode)
-        holder.tvItemNameValue.setText(stockItemMod.itemName)
-        holder.tvBarcodeValue.setText(stockItemMod.barcode)
+        holder.tvItemDescrValue.setText(stockItemMod.description)
+        holder.tvstockQtyValue.setText(stockItemMod.stockQty.toString())
 
     }
 
@@ -53,8 +53,9 @@ class MergeStockItemListAdapter(private val stockItemList: MutableList<ResponseO
     }
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val tvItemCodeValue: TextView = itemView.findViewById(R.id.tvItemCodeValue)
-        val tvItemNameValue: TextView = itemView.findViewById(R.id.tvItemNameValue)
-        val tvBarcodeValue: TextView = itemView.findViewById(R.id.tvBarcodeValue)
+        val tvItemDescrValue: TextView = itemView.findViewById(R.id.tvItemNameValue)
+        val tvstockQtyValue: TextView = itemView.findViewById(R.id.tvBarcodeValue)
+
 
     }
 

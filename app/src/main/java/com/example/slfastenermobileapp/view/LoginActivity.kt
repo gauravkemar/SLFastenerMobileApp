@@ -47,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.mcvLogin.setOnClickListener {
-//            login()
-            startActivity()
+          login()
+
         }
 
         viewModel.loginMutableLiveData.observe(this) { response ->
