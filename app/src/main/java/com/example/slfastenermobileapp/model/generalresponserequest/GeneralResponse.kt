@@ -1,8 +1,8 @@
 package com.example.slfastenermobileapp.model.generalresponserequest
 
 data class GeneralResponse(
-    val errorMessage: String,
+    val errorMessage: Any,
     val exception: Any,
-    val responseMessage: Any,
+    val responseMessage: String,
     val statusCode: Int
 )

@@ -5,12 +5,16 @@ package  com.example.demorfidapp.api
 
 
 import com.example.slfastenermobileapp.helper.Constants
+import com.example.slfastenermobileapp.helper.Constants.BARCODE_GENERATE_WITH_PREFIX
 import com.example.slfastenermobileapp.helper.Constants.LOGIN_URL
+import com.example.slfastenermobileapp.helper.Constants.MERGE_STOCK_ITEMS
 
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralResponse
 import com.example.slfastenermobileapp.model.login.LoginRequest
 import com.example.slfastenermobileapp.model.login.LoginResponse
+import com.example.slfastenermobileapp.model.merge.GetStockItemDetailsOnBarcodeMerge
+import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
 import com.example.slfastenermobileapp.model.putaway.GetStockItemDetailOnBarcodeResponse
 import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
 import com.example.slfastenermobileapp.model.putaway.VerifyLocationOnBarcodeResponse
@@ -60,6 +64,22 @@ interface SLFastenerAPI {
     suspend fun getStockItemDetailOnBarcodeMerge(
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) token: String,
         @Query("barcodeValue") barcodeValue: String?
-    ): Response<GetStockItemDetailOnBarcodeResponse>
+    ): Response<GetStockItemDetailsOnBarcodeMerge>
+
+    @GET(BARCODE_GENERATE_WITH_PREFIX)
+    suspend fun getBarcodeValueWithPrefix
+    (
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+        @Query("transactionPrefix") transactionPrefix: String?
+    ): Response<GeneralResponse>
+
+    @GET(MERGE_STOCK_ITEMS)
+    suspend fun mergeStockItems
+    (
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+        @Body
+        mergeStockLineItemRequest: MergeStockLineItemRequest
+    ): Response<GeneralResponse>
+
 
 }

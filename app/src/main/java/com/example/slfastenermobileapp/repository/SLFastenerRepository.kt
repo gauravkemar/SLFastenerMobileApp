@@ -5,6 +5,7 @@ import com.example.slfastenermobileapp.api.RetrofitInstance
 import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
 import com.example.slfastenermobileapp.model.login.LoginRequest
+import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
 import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -47,7 +48,7 @@ class SLFastenerRepository {
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
         baseUrl: String,
         @Query("barcodeValue") barcodeValue: String?
-    ) = RetrofitInstance.api(baseUrl).getStockItemDetailOnBarcode(bearerToken,barcodeValue)
+    ) = RetrofitInstance.api(baseUrl).getStockItemDetailOnBarcodeMerge(bearerToken,barcodeValue)
 
 
     suspend fun processStockPutAwayList(
@@ -56,6 +57,17 @@ class SLFastenerRepository {
         processStockPutAwayListRequest: ProcessStockPutAwayListRequest
     ) = RetrofitInstance.api(baseUrl).processStockPutAwayList(bearerToken,processStockPutAwayListRequest)
 
+    suspend fun getBarcodeValueWithPrefix(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Query("transactionPrefix") transactionPrefix: String?
+    ) = RetrofitInstance.api(baseUrl).getBarcodeValueWithPrefix(bearerToken,transactionPrefix)
 
+    suspend fun mergeStockItems(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Body
+        mergeStockLineItemRequest: MergeStockLineItemRequest
+    ) = RetrofitInstance.api(baseUrl).mergeStockItems(bearerToken,mergeStockLineItemRequest)
 
 }
