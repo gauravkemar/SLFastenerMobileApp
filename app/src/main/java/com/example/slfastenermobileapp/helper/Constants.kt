@@ -33,14 +33,16 @@ object Constants {
 
 
         //const val BASE_URL = "http://103.240.90.141:80/Service/api/"
-        //const val BASE_URL = "http://192.168.1.46:5000/api/"
-        const val BASE_URL = "http://192.168.1.205:4800/service/api/"
+        const val BASE_URL = "http://192.168.1.46:5000/api/"
+        ///const val BASE_URL = "http://192.168.1.205:4800/service/api/"
 
 
         const val LOGIN_URL = "UserManagement/authenticate"
         const val GET_STOCK_ITEM_DETAIL_ON_BARCODE = "stock/getStockItemDetailOnBarcode"
         const val VERIFY_LOCATION_ON_BARCODE_VALUE = "Location/verifyLocationOnBarcodeValue"
         const val PROCESS_STOCK_PUT_AWAY_LIST = "stock/processStockPutAwayList"
+
+        const val GET_STOCK_ITEM_DETAIL_ON_BARCODEMERGE = "stock/getStockItemDetailOnBarcode"
 
 
 

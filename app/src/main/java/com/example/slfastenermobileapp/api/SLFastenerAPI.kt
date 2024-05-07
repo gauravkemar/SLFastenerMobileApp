@@ -48,11 +48,18 @@ interface SLFastenerAPI {
         @Query("barcodeValue") barcodeValue: String?
     ): Response<GetStockItemDetailOnBarcodeResponse>
 
+
     @POST(Constants.PROCESS_STOCK_PUT_AWAY_LIST)
     suspend fun processStockPutAwayList(
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) token: String,
         @Body
         processStockPutAwayListRequest: ProcessStockPutAwayListRequest
     ): Response<GeneralResponse>
+
+    @GET(Constants.GET_STOCK_ITEM_DETAIL_ON_BARCODEMERGE)
+    suspend fun getStockItemDetailOnBarcodeMerge(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) token: String,
+        @Query("barcodeValue") barcodeValue: String?
+    ): Response<GetStockItemDetailOnBarcodeResponse>
 
 }

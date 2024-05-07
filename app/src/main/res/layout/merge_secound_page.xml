@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mvtitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/oneside_round"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_weight="0.20">
+
+    <include
+        android:id="@+id/idLayoutHeader"
+        layout="@layout/action_bar_header_layout"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/locationIcn"/>
+
+
+
+
+    <TextView
+        android:id="@+id/locatioName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:padding="10dp"
+
+        app:layout_constraintStart_toEndOf="@+id/locationIcn"
+        app:layout_constraintBottom_toTopOf="@+id/edLocText"
+        app:layout_constraintTop_toBottomOf="@+id/idLayoutHeader" />
+
+    <EditText
+        android:id="@+id/edLocText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="15dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/searchfield"
+        android:hint="Enter Number"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/circle_1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/circle_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_margin="5dp"
+        android:background="@drawable/circle_outline"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/scanicon"
+        app:layout_constraintBottom_toBottomOf="@+id/edLocText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edLocText"
+        app:layout_constraintTop_toTopOf="@+id/edLocText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

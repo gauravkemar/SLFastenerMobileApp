@@ -43,6 +43,12 @@ class SLFastenerRepository {
         @Query("barcodeValue") barcodeValue: String?
     ) = RetrofitInstance.api(baseUrl).getStockItemDetailOnBarcode(bearerToken,barcodeValue)
 
+    suspend fun getStockItemDetailOnBarcodeMerge(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Query("barcodeValue") barcodeValue: String?
+    ) = RetrofitInstance.api(baseUrl).getStockItemDetailOnBarcode(bearerToken,barcodeValue)
+
 
     suspend fun processStockPutAwayList(
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,

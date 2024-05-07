@@ -19,74 +19,87 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_weight="0.20">
 
-            <ImageView
-                android:id="@+id/Logo1"
-                android:layout_width="wrap_content"
+
+<!--            <ImageView-->
+<!--                android:id="@+id/Logo1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--android:maxHeight="dp"-->
+<!--                android:maxWidth="80dp"-->
+
+<!--                android:padding="10dp"-->
+
+<!--                android:scaleType="fitXY"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/first_logo" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/SecoundLogo"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="18sp"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:text="Chandni"-->
+
+<!--                app:layout_constraintEnd_toStartOf="@+id/logouticon"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/logouticon"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:padding="10dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+
+<!--                app:srcCompat="@drawable/dowbarrow" />-->
+            <include
+                android:id="@+id/idLayoutHeader"
+                layout="@layout/action_bar_header_layout"
+                android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:adjustViewBounds="true"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-
-
-                app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/first_logo" />
-
-
-            <TextView
-                android:id="@+id/SecoundLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_margin="5dp"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-                android:text="Chandni"
-
-                app:layout_constraintEnd_toStartOf="@+id/logouticon"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/logouticon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:adjustViewBounds="true"
-                android:padding="10dp"
-                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                app:srcCompat="@drawable/dowbarrow" />
-
-            <ImageView
-                android:id="@+id/locationIcn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:adjustViewBounds="true"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-
-
-                app:layout_constraintBottom_toTopOf="@+id/edLocText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Logo1"
-                app:srcCompat="@drawable/outline_place_24" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/edLocText"/>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/locationIcn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:padding="10dp"-->
+<!--                android:scaleType="fitXY"-->
 
 
-            <TextView
-                android:id="@+id/locatioName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="10dp"
-                android:text="location"
-                app:layout_constraintStart_toEndOf="@+id/locationIcn"
-                app:layout_constraintBottom_toTopOf="@+id/edLocText"
-                app:layout_constraintTop_toBottomOf="@+id/Logo1" />
+<!--                app:layout_constraintBottom_toTopOf="@+id/edLocText"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+
+<!--                app:srcCompat="@drawable/outline_place_24" />-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/locatioName"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="location"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/locationIcn"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/edLocText"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/idLayoutHeader" />-->
 
             <EditText
                 android:id="@+id/edLocText"
@@ -96,7 +109,7 @@
                 android:layout_margin="15dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/searchfield"
-                android:hint="select or set loaction"
+                android:hint="Select or scan loaction"
                 android:padding="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
 
@@ -190,7 +203,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clPickList"
-                tools:listitem="@layout/pick_list_item_layout" />
+                tools:listitem="@layout/putaway_list_item_layout" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -203,7 +216,7 @@
             android:layout_height="0dp"
             android:text="submit"
             android:textColor="@color/white"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="40dp"
             android:layout_margin="10dp"
             app:cardBackgroundColor="@color/orange"
             app:layout_constraintVertical_weight="0.10"

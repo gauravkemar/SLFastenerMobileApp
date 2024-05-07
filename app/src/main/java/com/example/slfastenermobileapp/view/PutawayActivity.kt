@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -67,7 +68,8 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         username = userDetails[Constants.KEY_USER_NAME].toString()
         stockItemDetails = ArrayList()
         putAwayList = ArrayList()
-        binding.SecoundLogo.setText(username)
+        binding.idLayoutHeader.profileTXt .setText(username)
+        binding.idLayoutHeader.logouticon.visibility= View.GONE
 
         /*apiCall()
     viewModel.generalMutable.observe(this) { response ->
@@ -427,27 +429,27 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         }
     }
 
-    override fun onData(scanDataCollection: ScanDataCollection?) {
-        var dataStr: String? = ""
-        if (scanDataCollection != null && scanDataCollection.result == ScannerResults.SUCCESS) {
-            val scanData = scanDataCollection.scanData
-            for (data in scanData) {
-                val barcodeData = data.data
-                val labelType = data.labelType
-                dataStr = barcodeData
-            }
-            //runOnUiThread { binding.edLocText.setText(dataStr) }
-            // checkVehicleInsideGeofenceBarcode(dataStr.toString())
-            dataStr?.let {
-                if (it.startsWith("Loc")) {
-                    verifyLoationBarcodeValue(it)
-                } else {
-                    getStockItemDetailOnBarcode(it)
+        override fun onData(scanDataCollection: ScanDataCollection?) {
+            var dataStr: String? = ""
+            if (scanDataCollection != null && scanDataCollection.result == ScannerResults.SUCCESS) {
+                val scanData = scanDataCollection.scanData
+                for (data in scanData) {
+                    val barcodeData = data.data
+                    val labelType = data.labelType
+                    dataStr = barcodeData
                 }
+                //runOnUiThread { binding.edLocText.setText(dataStr) }
+                // checkVehicleInsideGeofenceBarcode(dataStr.toString())
+                dataStr?.let {
+                    if (it.startsWith("Loc")) {
+                        verifyLoationBarcodeValue(it)
+                    } else {
+                        getStockItemDetailOnBarcode(it)
+                    }
+                }
+                Log.e("TAG", "Barcode Data : $dataStr")
             }
-            Log.e("TAG", "Barcode Data : $dataStr")
         }
-    }
     fun updateLocationCode(newLocationCode: String) {
         putAwayList.forEach { item ->
             item.locationCode = newLocationCode

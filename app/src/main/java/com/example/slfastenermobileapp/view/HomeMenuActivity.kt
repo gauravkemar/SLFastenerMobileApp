@@ -6,13 +6,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.example.slfastenermobileapp.R
+import com.example.slfastenermobileapp.databinding.ActionBarHeaderLayoutBinding
 import com.example.slfastenermobileapp.databinding.ActivityHomeMenuBinding
+import com.example.slfastenermobileapp.databinding.ActivityPutawayBinding
 import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.helper.SessionManager
 
 
 class HomeMenuActivity : AppCompatActivity() {
     lateinit var binding:ActivityHomeMenuBinding
+
     private lateinit var session: SessionManager
     private lateinit var userDetails: HashMap<String, Any?>
     private var token: String? = ""
@@ -25,13 +28,20 @@ class HomeMenuActivity : AppCompatActivity() {
         userDetails = session.getUserDetails()
         token = userDetails[Constants.KEY_JWT_TOKEN].toString()
         username = userDetails[Constants.KEY_USER_NAME].toString()
-        binding.tvUserName.setText(username)
+        binding.idLayoutHeader
+            .profileTXt.setText(username)
+
 
         binding.card1.setOnClickListener {
             startActivity(Intent(this@HomeMenuActivity,PutawayActivity::class.java))
         }
-        binding.logouticon.setOnClickListener {
+        binding.card2.setOnClickListener { startActivity(Intent(this@HomeMenuActivity,MergeActivity::class.java ))}
+
+        binding.card3.setOnClickListener { startActivity(Intent(this@HomeMenuActivity,SplitingActivity::class.java)) }
+        binding.card5.setOnClickListener { startActivity(Intent(this@HomeMenuActivity,ExitclearanceAcitvity::class.java)) }
+        binding.idLayoutHeader.logouticon.setOnClickListener {
             showLogoutDialog()
+
         }
     }
     private fun showLogoutDialog() {
