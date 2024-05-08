@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Item Code"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/greyString"
 
             android:textAlignment="textStart"
@@ -32,7 +32,7 @@
         <TextView
             android:id="@+id/tvItemDesc"
             android:layout_width="0dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:text="Item Description"
             android:layout_height="wrap_content"
             android:textColor="@color/greyString"
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/tvBarcode"
             android:layout_width="0dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:text="Total quality"
             android:textColor="@color/greyString"
 

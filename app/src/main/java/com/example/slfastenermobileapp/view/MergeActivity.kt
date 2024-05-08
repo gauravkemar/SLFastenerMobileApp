@@ -165,7 +165,45 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
                             try {
                                 var barcode=resultResponse.responseMessage
                                 callSubmitApi(barcode)
+                                print("================================================Success===============")
+                            } catch (e: Exception) {
+                                Toast.makeText(
+                                    this@MergeActivity,
+                                    "${e.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                    }
+                }
 
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { resultResponse ->
+                        Toast.makeText(this, resultResponse, Toast.LENGTH_SHORT).show()
+                        session.showToastAndHandleErrors(resultResponse, this@MergeActivity)
+                    }
+                }
+
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+
+                else -> {}
+            }
+        }
+
+        viewModel.mergeStockItemsMutableResponse.observe(this)
+        { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { resultResponse ->
+                        if (resultResponse != null) {
+                            try {
+                                val barcode=resultResponse.responseMessage
+                                callSubmitApi(barcode)
+                                print("================================================Success===============")
                             } catch (e: Exception) {
                                 Toast.makeText(
                                     this@MergeActivity,
@@ -215,6 +253,7 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
        try
        {
            viewModel.mergeStockItems(token!!,Constants.BASE_URL,MergeStockLineItemRequest(barcode,mergeStockLineItem))
+
        }
        catch (e:Exception)
        {

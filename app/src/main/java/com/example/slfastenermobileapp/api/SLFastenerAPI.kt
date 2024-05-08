@@ -73,7 +73,7 @@ interface SLFastenerAPI {
         @Query("transactionPrefix") transactionPrefix: String?
     ): Response<GeneralResponse>
 
-    @GET(MERGE_STOCK_ITEMS)
+    @POST(MERGE_STOCK_ITEMS)
     suspend fun mergeStockItems
     (
         @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
