@@ -90,7 +90,6 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
                                     binding.clBodyList.visibility = View.VISIBLE
                                     binding.mvView.visibility = View.VISIBLE
                                     binding.btnSubmit.visibility = View.VISIBLE
-
                                     binding.btnSubmit2.visibility = View.VISIBLE
 
                                     var barcode = resultResponse.responseObject.barcode
@@ -201,9 +200,7 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
                     response.data?.let { resultResponse ->
                         if (resultResponse != null) {
                             try {
-                                val barcode=resultResponse.responseMessage
-                                callSubmitApi(barcode)
-                                print("================================================Success===============")
+
                             } catch (e: Exception) {
                                 Toast.makeText(
                                     this@MergeActivity,
@@ -253,10 +250,10 @@ class MergeActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.Sta
        try
        {
            viewModel.mergeStockItems(token!!,Constants.BASE_URL,MergeStockLineItemRequest(barcode,mergeStockLineItem))
-
        }
        catch (e:Exception)
        {
+           Log.e("fromcallsubmitapi",e.message.toString())
            Toast.makeText(
                this@MergeActivity,
                e.message,
