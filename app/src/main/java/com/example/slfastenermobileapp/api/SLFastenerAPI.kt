@@ -8,6 +8,8 @@ import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.helper.Constants.BARCODE_GENERATE_WITH_PREFIX
 import com.example.slfastenermobileapp.helper.Constants.LOGIN_URL
 import com.example.slfastenermobileapp.helper.Constants.MERGE_STOCK_ITEMS
+import com.example.slfastenermobileapp.helper.Constants.Split_Stock_ITEMS
+
 
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralResponse
@@ -18,6 +20,8 @@ import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
 import com.example.slfastenermobileapp.model.putaway.GetStockItemDetailOnBarcodeResponse
 import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
 import com.example.slfastenermobileapp.model.putaway.VerifyLocationOnBarcodeResponse
+import com.example.slfastenermobileapp.model.split.GetStockItemDetailsOnBarcodeSplit
+import com.example.slfastenermobileapp.model.split.SplitStockItemResquest
 
 import retrofit2.Response
 import retrofit2.http.*
@@ -80,6 +84,19 @@ interface SLFastenerAPI {
         @Body
         mergeStockLineItemRequest: MergeStockLineItemRequest
     ): Response<GeneralResponse>
+    @POST(Split_Stock_ITEMS)
+    suspend fun splitStockItems
+                (
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+        @Body
+        splitStockLineItemRequest: SplitStockItemResquest
+    ): Response<GeneralResponse>
+    @GET(Constants.GET_STOCK_ITEM_DETAIL_ON_BARCODESPLIT)
+    suspend fun getStockItemDetailOnBarcodeSplit(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) token: String,
+        @Query("barcodeValue") barcodeValue: String?
+    ): Response<GetStockItemDetailsOnBarcodeSplit>
+
 
 
 }

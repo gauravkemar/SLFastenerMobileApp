@@ -7,6 +7,7 @@ import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequs
 import com.example.slfastenermobileapp.model.login.LoginRequest
 import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
 import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
+import com.example.slfastenermobileapp.model.split.SplitStockItemResquest
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -69,5 +70,17 @@ class SLFastenerRepository {
         @Body
         mergeStockLineItemRequest: MergeStockLineItemRequest
     ) = RetrofitInstance.api(baseUrl).mergeStockItems(bearerToken,mergeStockLineItemRequest)
+
+    suspend fun getStockItemDetailOnBarcodeSplit(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Query("barcodeValue") barcodeValue: String?
+    ) = RetrofitInstance.api(baseUrl).getStockItemDetailOnBarcodeSplit(bearerToken,barcodeValue)
+    suspend fun splitStockItems(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Body
+        splitStockLineItemRequest: SplitStockItemResquest
+    ) = RetrofitInstance.api(baseUrl).splitStockItems(bearerToken,splitStockLineItemRequest)
 
 }

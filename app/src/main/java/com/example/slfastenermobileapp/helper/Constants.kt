@@ -43,7 +43,9 @@ object Constants {
         const val PROCESS_STOCK_PUT_AWAY_LIST = "stock/processStockPutAwayList"
         const val BARCODE_GENERATE_WITH_PREFIX = "BarcdeGenerator/GetBarcodeValueWithPrefix"
         const val GET_STOCK_ITEM_DETAIL_ON_BARCODEMERGE = "stock/getStockItemDetailOnBarcode"
+        const val GET_STOCK_ITEM_DETAIL_ON_BARCODESPLIT = "stock/getStockItemDetailOnBarcode"
         const val MERGE_STOCK_ITEMS = "stock/mergeStockItems"
+        const val Split_Stock_ITEMS="stock/splitStockItem"
 
 
 
