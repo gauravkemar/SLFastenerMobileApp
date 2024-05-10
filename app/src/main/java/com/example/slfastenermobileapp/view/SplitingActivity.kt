@@ -16,8 +16,8 @@ import com.example.slfastenermobileapp.adapter.SplitStockItemListAdapter
 import com.example.slfastenermobileapp.databinding.ActivitySplitingBinding
 import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.helper.SessionManager
-import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
-import com.example.slfastenermobileapp.model.putaway.ResponseObjectX
+import com.example.slfastenermobileapp.model.split.CustomSplitModel
+import com.example.slfastenermobileapp.model.split.GetStockItemDetailsOnBarcodeSplit
 import com.example.slfastenermobileapp.model.split.SplitStockItemResquest
 import com.example.slfastenermobileapp.model.split.SplitStockLineItem
 import com.example.slfastenermobileapp.repository.SLFastenerRepository
@@ -34,8 +34,7 @@ import com.symbol.emdk.barcode.StatusData
 import es.dmoral.toasty.Toasty
 
 
-
-class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.StatusListener,
+class SplitingActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.StatusListener,
     Scanner.DataListener {
     lateinit var binding: ActivitySplitingBinding
     private lateinit var viewModel: SplitListModel
@@ -49,20 +48,18 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
     private lateinit var userDetails: HashMap<String, Any?>
     private var token: String? = ""
     private var username: String? = ""
-
-    lateinit var stockItemDetails: MutableList<ResponseObjectX>
-    lateinit var splitStockLineItem: MutableList<SplitStockLineItem>
-
-
+    lateinit var getStockItemDetailsOnBarcodeSplit: GetStockItemDetailsOnBarcodeSplit
 
     private var splitStockItemListAdapter: SplitStockItemListAdapter? = null
+    lateinit var stockItemDetails: MutableList<CustomSplitModel>
+    lateinit var splitItemRequest: MutableList<SplitStockItemResquest>
+
+    var totalQty = 0.000
+    private var stockItemId: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_spliting)
-        binding.btnSubmit.visibility = View.GONE
-//
-        binding.btnSubmit2.visibility = View.GONE
         progress = ProgressDialog(this)
         progress.setMessage("Please Wait...")
         val slFastenerRepository = SLFastenerRepository()
@@ -74,14 +71,10 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         userDetails = session.getUserDetails()
         token = userDetails[Constants.KEY_JWT_TOKEN].toString()
         username = userDetails[Constants.KEY_USER_NAME].toString()
+        binding.clProdItemDetails.visibility = View.GONE
+        binding.clBottom.visibility = View.GONE
         stockItemDetails = ArrayList()
-        splitStockLineItem = ArrayList()
-        binding.idLayoutHeader.profileTXt.setText(username)
-        binding.idLayoutHeader.logouticon.visibility = View.GONE
-        binding.clChild.visibility=View.GONE
-        binding.cls2.visibility=View.GONE
-        binding.btnItem.visibility=View.GONE
-
+        splitItemRequest = ArrayList()
         viewModel.getStockItemDetailOnBarcodeMutable.observe(this)
         { response ->
             when (response) {
@@ -90,51 +83,14 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                     response.data?.let { resultResponse ->
                         if (resultResponse != null) {
                             try {
-                                if (resultResponse.responseObject != null) {
-                                    binding.clBodyNoList.visibility = View.GONE
-                                    binding.clTop.visibility = View.VISIBLE
-                                    binding.cls2.visibility= View.VISIBLE
-                                    binding.rcScannedMergeList.visibility=View.VISIBLE
-                                    binding.btnItem.visibility=View.VISIBLE
-        //                            binding.mvView.visibility = View.VISIBLE
-
-                                    binding.btnSubmit.visibility = View.VISIBLE
-                                    binding.btnSubmit2.visibility = View.VISIBLE
-
-                                    var barcode = resultResponse.responseObject.barcode
-                                    if (barcode?.isNotEmpty() == true) {
-                                        val existingItem =
-                                            stockItemDetails.find { it.barcode == resultResponse.responseObject.barcode }
-                                        if (existingItem == null) {
-                                            stockItemDetails.add(resultResponse.responseObject)
-                                            splitStockItemListAdapter?.notifyItemInserted(
-                                                stockItemDetails.size - 1
-                                            )
-//                                            val stockPutAway = SplitStockLineItem(
-//                                                resultResponse.responseObject.stockQty.toInt(),
-//                                            )
-  //                                          splitStockLineItem.add(stockPutAway)
-                                            Toast.makeText(
-                                                this@SplitingActivity,
-                                                "Success",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                        } else {
-                                            Toast.makeText(
-                                                this@SplitingActivity,
-                                                "Product Already Exists",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                        }
-                                    }
-                                } else {
-                                    Toast.makeText(
-                                        this@SplitingActivity,
-                                        "${resultResponse.errorMessage}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-
+                                binding.clChild1.visibility = View.GONE
+                                binding.clChild2.visibility = View.VISIBLE
+                                binding.clProdItemDetails.visibility = View.VISIBLE
+                                binding.clBottom.visibility = View.VISIBLE
+                                binding.mvTittle.setBackgroundResource(R.drawable.oneside_round)
+                                getStockItemDetailsOnBarcodeSplit = resultResponse
+                                stockItemId =resultResponse.responseObject.stockItemId.toString()
+                                setProductItemDetails()
                             } catch (e: Exception) {
                                 Toast.makeText(
                                     this@SplitingActivity,
@@ -142,7 +98,6 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
-
                         }
                     }
                 }
@@ -162,110 +117,290 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                 else -> {}
             }
         }
-
-        viewModel.getBarcodeValueWithPrefixMutableResponse.observe(this)
-        { response ->
+        splitStockItemListAdapter =
+            SplitStockItemListAdapter(
+                stockItemDetails,
+                addItem = { newItem ->
+                    val tempList = stockItemDetails.toMutableList()
+                    tempList.add(newItem)
+                    getStockItemDetailOnBarcodeSplitNew()
+                    addExisitngNewItem(tempList,newItem)
+                },
+                onSave = { position, updatedItem ->
+                    val tempList = stockItemDetails.toMutableList()
+                    tempList[position] = updatedItem.copy()
+                    calculateQty(tempList, position, updatedItem)
+                },
+                onDelete = { position ->
+                    //stockItemDetails!!.removeAt(position)
+                },
+            )
+        binding.rcSplitlist.adapter = splitStockItemListAdapter
+        binding.rcSplitlist.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.mcvSplit.setOnClickListener {
+            generateBarcodeForExisitngItem()
+        }
+        viewModel.getBarcodeValueWithPrefixMutable.observe(this) { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { resultResponse ->
-                        if (resultResponse != null) {
-                            try {
-                                var barcode=resultResponse.responseMessage
-                                callSubmitApi()
-
-                            } catch (e: Exception) {
-                                Toast.makeText(
-                                    this@SplitingActivity,
-                                    "${e.message}",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                        try {
+                            addBatchNewItem(resultResponse.responseMessage.toString())
+                        } catch (e: Exception) {
+                            Log.e("stock1","7")
+                            Toasty.warning(
+                                this@SplitingActivity,
+                                e.printStackTrace().toString(),
+                                Toasty.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
 
                 is Resource.Error -> {
                     hideProgressBar()
-                    response.message?.let { resultResponse ->
-                        Toast.makeText(this, resultResponse, Toast.LENGTH_SHORT).show()
-                        session.showToastAndHandleErrors(resultResponse, this@SplitingActivity)
+                    response.message?.let { errorMessage ->
+                        Toasty.error(
+                            this@SplitingActivity,
+                            "Login failed - \nError Message: $errorMessage"
+                        ).show()
                     }
                 }
 
                 is Resource.Loading -> {
                     showProgressBar()
                 }
-
-                else -> {}
             }
         }
 
-//        viewModel.splitStockItemsMutableResponse.observe(this)
-//        { response ->
-//            when (response) {
-//                is Resource.Success -> {
-//                    hideProgressBar()
-//                    response.data?.let { resultResponse ->
-//                        if (resultResponse != null) {
-//                            try {
-//
-//                            } catch (e: Exception) {
-//                                Toast.makeText(
-//                                    this@SplitingActivity,
-//                                    "${e.message}",
-//                                    Toast.LENGTH_LONG
-//                                ).show()
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                is Resource.Error -> {
-//                    hideProgressBar()
-//                    response.message?.let { resultResponse ->
-//                        Toast.makeText(this, resultResponse, Toast.LENGTH_SHORT).show()
-//                        session.showToastAndHandleErrors(resultResponse, this@SplitingActivity)
-//                    }
-//                }
-//
-//                is Resource.Loading -> {
-//                    showProgressBar()
-//                }
-//
-//                else -> {}
-//            }
-//        }
+        //need to change the icons for print
+        viewModel.splitItemsMutableResponse.observe(this) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { resultResponse ->
+                        try {
 
-        splitStockItemListAdapter = SplitStockItemListAdapter(stockItemDetails)
-        binding.rcScannedMergeList.adapter = splitStockItemListAdapter
+                        } catch (e: Exception) {
+                            Log.e("stock1","7")
+                            Toasty.warning(
+                                this@SplitingActivity,
+                                e.printStackTrace().toString(),
+                                Toasty.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
 
-        binding.btnSubmit2.setOnClickListener {
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { errorMessage ->
+                        Toasty.error(
+                            this@SplitingActivity,
+                            "Login failed - \nError Message: $errorMessage"
+                        ).show()
+                    }
+                }
 
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
         }
-        binding.rcScannedMergeList.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rcScannedMergeList.setHasFixedSize(true)
+
+        binding.btnSubmit.setOnClickListener {
+            callSubmitApi()
+        }
         if (Build.MANUFACTURER.contains("Zebra Technologies") || Build.MANUFACTURER.contains("Motorola Solutions")) {
             initBarcode()
+        }
+    }
+
+    private fun addBatchNewItem(data: String) {
+
+        val hasItemWithZeroReceivedQuantity = stockItemDetails?.any {
+            it.Qty == "0.000"
+        } ?: false
+
+        if (hasItemWithZeroReceivedQuantity) {
+            Toasty.warning(this@SplitingActivity, "Please complete current transaction!!")
+                .show()
+            Log.d("edBatchNo.isNotEmpty()", "sad")
+        } else {
+            stockItemDetails.add(
+                createSingleItem(data)
+            )
+            splitStockItemListAdapter?.notifyItemInserted(stockItemDetails.size - 1)
+            }
+        }
+
+    private fun createSingleItem(
+        newBarcode: String
+    ): CustomSplitModel {
+
+        return CustomSplitModel(
+            newBarcode,
+             "0.000",
+            false
+        )
+    }
+ private fun createSingleExistingItem(
+     newBarcode: String,
+     customSplitModel: CustomSplitModel,
+
+     ): CustomSplitModel {
+        return CustomSplitModel(
+            newBarcode,
+            customSplitModel.Qty,
+            false
+        )
+    }
+
+    private fun calculateQty(tempList: MutableList<CustomSplitModel>, position: Int, updatedItem: CustomSplitModel)
+    {
+
+        if ( updatedItem.Qty != "0.000") {
+            val sumOfReceivedQtyIncludingUpdatedItem =
+                tempList.sumByDouble { it.Qty.toDouble()
+                }
+            if (sumOfReceivedQtyIncludingUpdatedItem > totalQty.toDouble())
+            {
+                Toast.makeText(
+                    this,
+                    "Value must not exceed the Balance Qty.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else {
+                stockItemDetails[position] = updatedItem.copy()
+                splitStockItemListAdapter!!.notifyItemChanged(position)
+            }
+        }
+        else
+        {
+            Toast.makeText(
+                this,
+                "Value must not be 0.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+
+    }
+
+    private fun addExisitngNewItem(
+        templist: MutableList<CustomSplitModel>,
+        customSplitModel: CustomSplitModel
+    ) {
+
+        viewModel.getBarcodeValueWithPrefixNewMutable.observe(this) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { resultResponse ->
+                        try {
+                            val newBarcode = resultResponse.responseMessage.toString()
+
+                            val hasItemWithZeroReceivedQuantity = stockItemDetails?.any {
+                                it.Qty == "0.000"
+                            } ?: false
+
+                            val sumOfReceivedQtyIncludingUpdatedItem =
+                                templist.sumByDouble { it.Qty.toDouble() }
+                            if (sumOfReceivedQtyIncludingUpdatedItem > totalQty.toDouble())
+                            {
+                                Toast.makeText(
+                                    this,
+                                    "Value must not exceed the Balance Qty.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            else{
+                                if (hasItemWithZeroReceivedQuantity) {
+                                    Toasty.warning(this@SplitingActivity, "Please complete current transaction!!")
+                                        .show()
+                                    Log.d("edBatchNo.isNotEmpty()", "sad")
+                                } else {
+                                    val barcodeExists =
+                                        stockItemDetails!!.any { it.Barcode == newBarcode }
+                                    if(!barcodeExists)
+                                    {
+                                        stockItemDetails.add(
+                                            createSingleExistingItem(newBarcode,customSplitModel)
+                                        )
+                                        splitStockItemListAdapter?.notifyItemInserted(stockItemDetails.size - 1)
+                                    }else
+                                    {}
+                                }
+                            }
+
+                        }
+                        catch (e: Exception) {
+                            Toasty.warning(
+                                this@SplitingActivity,
+                                e.printStackTrace().toString(),
+                                Toasty.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { errorMessage ->
+                        Toasty.error(
+                            this@SplitingActivity,
+                            "Login failed - \nError Message: $errorMessage"
+                        ).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
         }
 
     }
 
-    private fun callSubmitApi() {
-        try
-        {
-//            viewModel.splitStockItems(token!!,Constants.BASE_URL,
-//                SplitStockItemResquest()
-//            )
-//            viewModel.splitStockItems(token!!,
-//                Constants.BASE_URL,
-//                SplitStockItemResquest(barcode,splitStockLineItem)
-//            )
+
+
+    private fun setProductItemDetails() {
+        binding.clProdItemDetails.visibility = View.VISIBLE
+        binding.tvItemCodeValue.setText(getStockItemDetailsOnBarcodeSplit.responseObject.itemCode)
+        binding.tvItemNameValue.setText(getStockItemDetailsOnBarcodeSplit.responseObject.itemName)
+        binding.tvQuantity.setText(getStockItemDetailsOnBarcodeSplit.responseObject.stockQty.toString())
+        var stockQtyString = getStockItemDetailsOnBarcodeSplit.responseObject.stockQty.toString()
+        val stockQtyDouble = if ('.' !in stockQtyString) {
+            "$stockQtyString.0".toDouble()
+        } else {
+            stockQtyString.toDouble()
         }
-        catch (e:Exception)
-        {
-            Log.e("fromcallsubmitapi",e.message.toString())
+
+        totalQty=stockQtyDouble
+
+    }
+
+    private fun callSubmitApi() {
+        try {
+            val sumOfReceivedQtyIncludingUpdatedItem =
+                stockItemDetails.sumByDouble { it.Qty.toDouble()
+                }
+            if (sumOfReceivedQtyIncludingUpdatedItem != totalQty.toDouble())
+            {
+                Toast.makeText(
+                    this, "Please Split all Quantity.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else
+            {
+                submitSplit()
+            }
+        } catch (e: Exception) {
+            Log.e("fromcallsubmitapi", e.message.toString())
             Toast.makeText(
                 this@SplitingActivity,
                 e.message,
@@ -274,70 +409,64 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         }
     }
 
-    private fun SplitTheList() {
-        if (stockItemDetails.size > 0) {
-            val totalStockQty = stockItemDetails. sumBy{ it.stockQty!! }
-            var tempModel = ResponseObjectX(
-                stockItemDetails.get(0).barcode,
-                stockItemDetails.get(0).blockedQty,
-                stockItemDetails.get(0).description,
-                stockItemDetails.get(0).expiryDate,
-                stockItemDetails.get(0).grnId,
-                stockItemDetails.get(0).internalBatchNo,
-                stockItemDetails.get(0).isActive,
-                stockItemDetails.get(0).isExpirable,
-                stockItemDetails.get(0).isPutAwayDone,
-                stockItemDetails.get(0).isQCRequired,
-                stockItemDetails.get(0).isSaleBlocked,
-                stockItemDetails.get(0).itemCategory,
-                stockItemDetails.get(0).itemCode,
-                stockItemDetails.get(0).itemGroup,
-                stockItemDetails.get(0).itemName,
-                stockItemDetails.get(0).itemPrice,
-                stockItemDetails.get(0).locationId,
-                stockItemDetails.get(0).mhType,
-                stockItemDetails.get(0).parentChildLinkedIds,
-                stockItemDetails.get(0).qcStatus,
-                stockItemDetails.get(0).qtyBlockRemarks,
-                stockItemDetails.get(0).qtyBlockedBy,
-                stockItemDetails.get(0).qtyForSale,
-                stockItemDetails.get(0).qtyReleaseDate,
-                stockItemDetails.get(0).saleBlockedBy,
-                stockItemDetails.get(0).stockInAt,
-                stockItemDetails.get(0).stockItemBatches,
-                stockItemDetails.get(0).stockItemId,
-                totalStockQty,
-                stockItemDetails.get(0).supplierBatchNo,
-                stockItemDetails.get(0).uom,
-            )
-            stockItemDetails.clear()
-            stockItemDetails.add(tempModel)
-            splitStockItemListAdapter!!.notifyDataSetChanged()
-            binding.btnSubmit2.visibility= View.GONE
-//            binding.btnSubmitFinal.visibility= View.VISIBLE
+    private fun generateBarcodeForExisitngItem() {
+        try {
+            viewModel.getBarcodeValueWithPrefix(token!!, Constants.BASE_URL, "S")
+        } catch (e: Exception) {
+            Toasty.error(
+                this,
+                e.message.toString(),
+                Toasty.LENGTH_LONG
+            ).show()
+        }
+
+    }
+    private fun getStockItemDetailOnBarcodeSplitNew() {
+        try {
+            viewModel.getBarcodeValueWithPrefixNew(token!!, Constants.BASE_URL, "S")
+        } catch (e: Exception) {
+            Toasty.error(
+                this,
+                e.message.toString(),
+                Toasty.LENGTH_LONG
+            ).show()
+        }
+
+    }
+  private fun submitSplit() {
+        try {
+            var splitStockLineItem: MutableList<SplitStockLineItem> = mutableListOf()
+            for(i in   stockItemDetails)
+            {
+                splitStockLineItem.add(SplitStockLineItem(i.Barcode,i.Qty))
+            }
+
+            if(splitStockLineItem.size>0)
+            {
+                viewModel.splitStockItems(token!!, Constants.BASE_URL, SplitStockItemResquest(splitStockLineItem,stockItemId!!.toInt()))
+            }
+
+        } catch (e: Exception) {
+            Toasty.error(
+                this,
+                e.message.toString(),
+                Toasty.LENGTH_LONG
+            ).show()
+        }
+
+    }
+
+    private fun getProductItemDetails(data: String) {
+        try {
+            viewModel.getStockItemDetailOnBarcode(token!!, Constants.BASE_URL, data)
+        } catch (e: Exception) {
+            runOnUiThread { Toasty.warning(this@SplitingActivity, e.message.toString()).show() }
 
         }
     }
 
-//    private fun generateBarcodeForBatches() {
-//        try {
-//            viewModel.getBarcodeValueWithPrefix(token!!, Constants.BASE_URL, "G")
-//        } catch (e: Exception) {
-//            Toasty.error(
-//                this,
-//                e.message.toString(),
-//                Toasty.LENGTH_LONG
-//            ).show()
-//        }
-//
-//    }
-
     private fun clearAll() {
-       // binding.edLocText.setText("")
-
         stockItemDetails.clear()
-        splitStockLineItem.clear()
-        //binding.totalCount.setText("0")
         splitStockItemListAdapter!!.notifyDataSetChanged()
     }
 
@@ -348,24 +477,6 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
     private fun hideProgressBar() {
         progress.cancel()
     }
-
-
-    //API Call
-
-
-    private fun getStockItemDetailOnBarcode(s: String) {
-        try {
-            viewModel.getStockItemDetailOnBarcode(
-                token!!,
-                Constants.BASE_URL,
-                s
-            )
-        } catch (e: Exception) {
-            runOnUiThread { Toasty.warning(this@SplitingActivity, e.message.toString()).show() }
-
-        }
-    }
-
 
     /////barcode code
     private fun initBarcode() {
@@ -431,7 +542,7 @@ class SplitingActivity :AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
             }
 
             dataStr?.let {
-                getStockItemDetailOnBarcode(it)
+                getProductItemDetails(it)
             }
             Log.e("TAG", "Barcode Data : $dataStr")
         }

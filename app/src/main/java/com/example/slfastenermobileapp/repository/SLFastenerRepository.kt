@@ -58,11 +58,7 @@ class SLFastenerRepository {
         processStockPutAwayListRequest: ProcessStockPutAwayListRequest
     ) = RetrofitInstance.api(baseUrl).processStockPutAwayList(bearerToken,processStockPutAwayListRequest)
 
-    suspend fun getBarcodeValueWithPrefix(
-        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
-        baseUrl: String,
-        @Query("transactionPrefix") transactionPrefix: String?
-    ) = RetrofitInstance.api(baseUrl).getBarcodeValueWithPrefix(bearerToken,transactionPrefix)
+
 
     suspend fun mergeStockItems(
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
@@ -76,6 +72,18 @@ class SLFastenerRepository {
         baseUrl: String,
         @Query("barcodeValue") barcodeValue: String?
     ) = RetrofitInstance.api(baseUrl).getStockItemDetailOnBarcodeSplit(bearerToken,barcodeValue)
+
+    suspend fun getBarcodeValueWithPrefix(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Query("transactionPrefix") transactionPrefix: String?
+    ) = RetrofitInstance.api(baseUrl).getBarcodeValueWithPrefix(bearerToken,transactionPrefix)
+    suspend fun getBarcodeValueWithPrefixNew(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Query("transactionPrefix") transactionPrefix: String?
+    ) = RetrofitInstance.api(baseUrl).getBarcodeValueWithPrefixNew(bearerToken,transactionPrefix)
+
     suspend fun splitStockItems(
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
         baseUrl: String,

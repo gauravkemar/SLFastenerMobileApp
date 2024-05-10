@@ -70,12 +70,7 @@ interface SLFastenerAPI {
         @Query("barcodeValue") barcodeValue: String?
     ): Response<GetStockItemDetailsOnBarcodeMerge>
 
-    @GET(BARCODE_GENERATE_WITH_PREFIX)
-    suspend fun getBarcodeValueWithPrefix
-    (
-        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
-        @Query("transactionPrefix") transactionPrefix: String?
-    ): Response<GeneralResponse>
+
 
     @POST(MERGE_STOCK_ITEMS)
     suspend fun mergeStockItems
@@ -96,6 +91,20 @@ interface SLFastenerAPI {
         @Header(Constants.HTTP_HEADER_AUTHORIZATION) token: String,
         @Query("barcodeValue") barcodeValue: String?
     ): Response<GetStockItemDetailsOnBarcodeSplit>
+
+
+    @GET(BARCODE_GENERATE_WITH_PREFIX)
+    suspend fun getBarcodeValueWithPrefix
+                (
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+        @Query("transactionPrefix") transactionPrefix: String?
+    ): Response<GeneralResponse>
+    @GET(BARCODE_GENERATE_WITH_PREFIX)
+    suspend fun getBarcodeValueWithPrefixNew
+                (
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+        @Query("transactionPrefix") transactionPrefix: String?
+    ): Response<GeneralResponse>
 
 
 

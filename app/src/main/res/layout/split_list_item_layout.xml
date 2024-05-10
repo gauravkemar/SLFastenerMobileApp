@@ -12,35 +12,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-
+        app:layout_constraintEnd_toStartOf="@+id/clTop2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvItemCode"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bar Code"
+            android:padding="5dp"
             android:textAlignment="textStart"
-            android:textColor="@color/greyString"
-            android:textSize="14sp"
-            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="10sp"
             app:layout_constraintBottom_toTopOf="@+id/tvItemCodeValue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
-
             />
 
         <TextView
             android:id="@+id/tvItemCodeValue"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ENA132"
-            android:textAlignment="textStart"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -52,94 +53,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/clTop3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/clTop"
         >
-
         <TextView
             android:id="@+id/tvItemCode2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total quality"
+            android:text="Quantity"
             android:textAlignment="textStart"
-            android:textColor="@color/greyString"
-            android:textSize="14sp"
-
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tvBarcodeValue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-
         <EditText
             android:id="@+id/tvBarcodeValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
+            android:padding="5dp"
             android:layout_marginStart="4dp"
             android:background="@drawable/rec_shape_total_quality"
             android:paddingHorizontal="15dp"
             android:text="20"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvItemCode2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clPrint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <!-- Vertical Line -->
-        <View
-            android:id="@+id/vrtLine"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-        android:layout_marginEnd="20dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/printIcon"
-
-            app:layout_constraintTop_toTopOf="parent" />
-        <ImageView
-            android:id="@+id/printIcon"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:adjustViewBounds="true"
-            android:maxWidth="30dp"
-            android:maxHeight="30dp"
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/printTxt"
-            app:srcCompat="@drawable/print_icon" />
-
-        <TextView
-            android:id="@+id/printTxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:text="Print"
-
-            android:textAlignment="textStart"
-            android:textColor="@color/greyString"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printIcon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -148,76 +97,162 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clTop2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
-
-        <ImageView
-            android:id="@+id/copyIcon"
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:adjustViewBounds="true"
-            android:maxWidth="30dp"
-            android:maxHeight="30dp"
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/delIcon"
+            android:layout_margin="5dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/copy_icon" />
+            app:layout_constraintEnd_toStartOf="@+id/clDublicate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <ImageView
+                android:id="@+id/ivSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="25dp"
+                android:maxWidth="25dp"
+                android:padding="5dp"
+                android:textAlignment="textStart"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/iv_save_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tvSave"
+                />
 
-        <TextView
-            android:id="@+id/dupTxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="duplicate"
-            android:textAlignment="textStart"
+            <TextView
+                android:id="@+id/tvSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
 
-            android:textColor="@color/greyString"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/verticalLine"
-            app:layout_constraintTop_toBottomOf="@+id/copyIcon" />
-        <!-- Vertical Line -->
+                android:padding="5dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@+id/ivSave"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
-            android:id="@+id/verticalLine"
+            android:id="@+id/vl1"
             android:layout_width="1dp"
             android:layout_height="0dp"
-
-            android:background="@android:color/darker_gray"
+            android:background="@color/greyString"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/delIcon"
-            app:layout_constraintStart_toEndOf="@+id/copyIcon"
+            app:layout_constraintEnd_toStartOf="@+id/clDublicate"
+            app:layout_constraintStart_toEndOf="@+id/clSave"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Delete Icon ImageView -->
-        <ImageView
-            android:id="@+id/delIcon"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDublicate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxWidth="30dp"
-            android:maxHeight="30dp"
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="5dp"
+            app:layout_constraintStart_toEndOf="@+id/clSave"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/delete_icon" />
+            app:layout_constraintEnd_toStartOf="@+id/clPrintDelete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <ImageView
+                android:id="@+id/copyIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="25dp"
+                android:maxWidth="25dp"
+                android:textAlignment="textStart"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/copy_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/dupTxt"
+                />
 
-        <TextView
-            android:id="@+id/txtDel"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/dupTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dublicate"
+
+                android:padding="5dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@+id/copyIcon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/vl2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/greyString"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/clPrintDelete"
+            app:layout_constraintStart_toEndOf="@+id/clDublicate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPrintDelete"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:textAlignment="textStart"
-
-            android:textColor="@color/greyString"
-            android:textSize="12sp"
+            android:layout_margin="5dp"
+            app:layout_constraintStart_toEndOf="@+id/clDublicate"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/delIcon" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <ImageView
+                android:id="@+id/ivPrintDel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="25dp"
+                android:maxWidth="25dp"
+                android:padding="2dp"
+                android:textAlignment="textStart"
+                android:textSize="12sp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/delete_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tvPrintDel"
+                />
 
+            <TextView
+                android:id="@+id/tvPrintDel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:padding="5dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@+id/ivPrintDel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

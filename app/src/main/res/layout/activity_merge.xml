@@ -82,8 +82,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="visible"
-
-
                     tools:listitem="@layout/merge_list_item_layout"
                     />
 
@@ -92,9 +90,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clBodyNoList"
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent"
-
                 >
 
                 <ImageView

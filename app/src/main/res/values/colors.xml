@@ -7,4 +7,6 @@
     <color name="blueString">#5E92BD</color>
     <color name="blueFrgt">#FF5E92BD</color>
     <color name="blueBnt">#2C6B9E</color>
+    <color name="tv_sub_head_color">#030335</color>
+    <color name="blue">#0054a6</color>
 </resources>

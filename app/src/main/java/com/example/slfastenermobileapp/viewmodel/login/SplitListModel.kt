@@ -80,10 +80,10 @@ private val rfidRepository: SLFastenerRepository
         return Resource.Error(errorMessage)
     }
 
+////////////////////////////// SPLIT Prefix (S)
+    // //////////////////////////////////////////////////////////////////////////////////////////////
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    val getBarcodeValueWithPrefixMutableResponse: MutableLiveData<Resource<GeneralResponse>> =
+    val getBarcodeValueWithPrefixMutable: MutableLiveData<Resource<GeneralResponse>> =
         MutableLiveData()
 
     fun getBarcodeValueWithPrefix(token: String, baseUrl: String, transactionPrefix: String) {
@@ -91,34 +91,33 @@ private val rfidRepository: SLFastenerRepository
             safeAPICallGetBarcodeValueWithPrefix(token, baseUrl, transactionPrefix)
         }
     }
-
     private suspend fun safeAPICallGetBarcodeValueWithPrefix(
         token: String,
         baseUrl: String,
         transactionPrefix: String
     ) {
-        getBarcodeValueWithPrefixMutableResponse.postValue(Resource.Loading())
+        getBarcodeValueWithPrefixMutable.postValue(Resource.Loading())
         try {
             if (Utils.hasInternetConnection(getApplication())) {
                 val response =
                     rfidRepository.getBarcodeValueWithPrefix(token, baseUrl, transactionPrefix)
-                getBarcodeValueWithPrefixMutableResponse.postValue(
+                getBarcodeValueWithPrefixMutable.postValue(
                     handleGetBarcodeValueWithPrefix(
                         response
                     )
                 )
             } else {
-                getBarcodeValueWithPrefixMutableResponse.postValue(Resource.Error(Constants.NO_INTERNET))
+                getBarcodeValueWithPrefixMutable.postValue(Resource.Error(Constants.NO_INTERNET))
             }
         } catch (t: Throwable) {
             when (t) {
-                is IOException -> getBarcodeValueWithPrefixMutableResponse.postValue(
+                is IOException -> getBarcodeValueWithPrefixMutable.postValue(
                     Resource.Error(
                         Constants.CONFIG_ERROR
                     )
                 )
 
-                else -> getBarcodeValueWithPrefixMutableResponse.postValue(Resource.Error("${t.message}"))
+                else -> getBarcodeValueWithPrefixMutable.postValue(Resource.Error("${t.message}"))
             }
         }
     }
@@ -139,6 +138,64 @@ private val rfidRepository: SLFastenerRepository
         }
         return Resource.Error(errorMessage)
     }
+
+
+
+    ////////////////////////////// SPLIT Prefix (S)
+    // //////////////////////////////////////////////////////////////////////////////////////////////
+
+    val getBarcodeValueWithPrefixNewMutable: MutableLiveData<Resource<GeneralResponse>> =
+        MutableLiveData()
+
+    fun getBarcodeValueWithPrefixNew(token: String, baseUrl: String, transactionPrefix: String) {
+        viewModelScope.launch {
+            safeAPICallGetBarcodeValueWithPrefixNew(token, baseUrl, transactionPrefix)
+        }
+    }
+
+    private suspend fun safeAPICallGetBarcodeValueWithPrefixNew(
+        token: String,
+        baseUrl: String,
+        transactionPrefix: String
+    ) {
+        getBarcodeValueWithPrefixNewMutable.postValue(Resource.Loading())
+        try {
+            if (Utils.hasInternetConnection(getApplication())) {
+                val response = rfidRepository.getBarcodeValueWithPrefixNew(token, baseUrl, transactionPrefix)
+                getBarcodeValueWithPrefixNewMutable.postValue(
+                    handleGetBarcodeValueWithPrefixNewNewMutable(response)
+                )
+            } else {
+                getBarcodeValueWithPrefixNewMutable.postValue(Resource.Error(Constants.NO_INTERNET))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> getBarcodeValueWithPrefixNewMutable.postValue(
+                    Resource.Error(
+                        Constants.CONFIG_ERROR
+                    )
+                )
+                else -> getBarcodeValueWithPrefixNewMutable.postValue(Resource.Error("${t.message}"))
+            }
+        }
+    }
+    private fun handleGetBarcodeValueWithPrefixNewNewMutable(response: Response<GeneralResponse>): Resource<GeneralResponse> {
+        var errorMessage = ""
+        if (response.isSuccessful) {
+            response.body()?.let { appDetailsResponse ->
+                return Resource.Success(appDetailsResponse)
+            }
+        } else if (response.errorBody() != null) {
+            val errorObject = response.errorBody()?.let {
+                JSONObject(it.charStream().readText())
+            }
+            errorObject?.let {
+                errorMessage = it.getString(Constants.HTTP_ERROR_MESSAGE)
+            }
+        }
+        return Resource.Error(errorMessage)
+    }
+
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

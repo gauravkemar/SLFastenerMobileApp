@@ -29,7 +29,7 @@ data class ResponseObjectX(
     val stockInAt: String?,
     val stockItemBatches: List<Any>?,
     val stockItemId: Int?,
-    val stockQty: Int?,
+    val stockQty: Int,
     val supplierBatchNo: String?,
     val uom: String?
 )
