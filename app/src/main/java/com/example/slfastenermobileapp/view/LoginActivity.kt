@@ -27,6 +27,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var progress: ProgressDialog
     private lateinit var session: SessionManager
+    private var baseUrl: String =""
+    private var serverIpSharedPrefText: String? = null
+    private var serverHttpPrefText: String? = null
+    private var adminDetails: HashMap<String, Any?>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +38,14 @@ class LoginActivity : AppCompatActivity() {
         session = SessionManager(this)
         progress = ProgressDialog(this)
         progress.setMessage("Please Wait...")
+        adminDetails = session!!.getUserDetails()
+        serverIpSharedPrefText = adminDetails!![Constants.KEY_SERVER_IP].toString()
+        serverHttpPrefText = adminDetails!![Constants.KEY_HTTP].toString()
+        baseUrl = "$serverHttpPrefText://$serverIpSharedPrefText/service/api/"
 
         val slFastenerRepository = SLFastenerRepository()
         val viewModelProviderFactory = LoginViewModelFactory(application, slFastenerRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[LoginViewModel ::class.java]
-
 
         if (Utils.getSharedPrefsBoolean(this@LoginActivity, Constants.KEY_ISLOGGEDIN, false)) {
             if(Utils.getSharedPrefsBoolean(this@LoginActivity, Constants.KEY_ISLOGGEDIN, true)) {
@@ -48,9 +55,7 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.mcvLogin.setOnClickListener {
           login()
-
         }
-
         viewModel.loginMutableLiveData.observe(this) { response ->
             when (response) {
                 is Resource.Success -> {
@@ -93,6 +98,9 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.mcvClear.setOnClickListener {
+            clear()
+        }
     }
     fun startActivity()
     {
@@ -118,13 +126,20 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.editTextPassword .text.toString().trim()
 
             // Validate user input
-            val validationMessage = validateInput(userId, password)
-            if (validationMessage == null) {
-                val loginRequest = LoginRequest( password, userId )
-                viewModel.login(Constants.BASE_URL, loginRequest)
-            } else {
-                showErrorMessage(validationMessage)
+            if (userId == "admin" && password == "Pass@123"){
+                startActivity(Intent(this@LoginActivity,AdminActivity::class.java))
             }
+            else
+            {
+                val validationMessage = validateInput(userId, password)
+                if (validationMessage == null) {
+                    val loginRequest = LoginRequest( password, userId )
+                    viewModel.login(baseUrl, loginRequest)
+                } else {
+                    showErrorMessage(validationMessage)
+                }
+            }
+
         } catch (e: Exception) {
             showErrorMessage(e.printStackTrace().toString())
         }

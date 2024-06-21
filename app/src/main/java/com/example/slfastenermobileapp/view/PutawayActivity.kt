@@ -21,8 +21,8 @@ import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequ
 import com.example.slfastenermobileapp.model.putaway.ResponseObjectX
 import com.example.slfastenermobileapp.model.putaway.StockPutAway
 import com.example.slfastenermobileapp.repository.SLFastenerRepository
-import com.example.slfastenermobileapp.viewmodel.login.PutAwayListViewModel
-import com.example.slfastenermobileapp.viewmodel.login.PutAwayListViewModelFactory
+import com.example.slfastenermobileapp.viewmodel.PutAwayListViewModel
+import com.example.slfastenermobileapp.viewmodel.PutAwayListViewModelFactory
 import com.symbol.emdk.EMDKManager
 import com.symbol.emdk.EMDKResults
 import com.symbol.emdk.barcode.BarcodeManager
@@ -52,9 +52,23 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
 
     lateinit var putAwayList: MutableList<StockPutAway>
     private var putAwayStockItemListAdapter: PutAwayStockItemListAdapter? = null
+
+    private var baseUrl: String =""
+    private var serverIpSharedPrefText: String? = null
+    private var serverHttpPrefText: String? = null
+    private var adminDetails: HashMap<String, Any?>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_putaway)
+
+        val drawable = ContextCompat.getDrawable(this, R.drawable.back_arrow)
+        binding.idLayoutHeader.ivBackOrLogo.setImageDrawable(drawable)
+        binding.idLayoutHeader.ivBackOrLogo.setOnClickListener {
+            onBackPressed()
+        }
+        binding.idLayoutHeader.titleText.visibility=View.VISIBLE
+        binding.idLayoutHeader.profileTXt. visibility=View.GONE
+        binding.idLayoutHeader.titleText.setText("Put Away")
         progress = ProgressDialog(this)
         progress.setMessage("Please Wait...")
         val slFastenerRepository = SLFastenerRepository()
@@ -66,32 +80,36 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         userDetails = session.getUserDetails()
         token = userDetails[Constants.KEY_JWT_TOKEN].toString()
         username = userDetails[Constants.KEY_USER_NAME].toString()
+        serverIpSharedPrefText = userDetails!![Constants.KEY_SERVER_IP].toString()
+        serverHttpPrefText = userDetails!![Constants.KEY_HTTP].toString()
+        baseUrl = "$serverHttpPrefText://$serverIpSharedPrefText/service/api/"
+
         stockItemDetails = ArrayList()
         putAwayList = ArrayList()
         binding.idLayoutHeader.profileTXt .setText(username)
         binding.idLayoutHeader.logouticon.visibility= View.GONE
 
-        /*apiCall()
-    viewModel.generalMutable.observe(this) { response ->
-        when (response) {
-            is Resource.Success -> {
-                hideProgressBar()
+            /*apiCall()
+        viewModel.generalMutable.observe(this) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
 
-            }
-            is Resource.Error -> {
-                hideProgressBar()
-                response.message?.let { errorMessage ->
-                    Toasty.error(
-                        this@PutawayActivity,
-                        "Login failed - \nError Message: $errorMessage"
-                    ).show()
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { errorMessage ->
+                        Toasty.error(
+                            this@PutawayActivity,
+                            "Login failed - \nError Message: $errorMessage"
+                        ).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
                 }
             }
-            is Resource.Loading -> {
-                showProgressBar()
-            }
-        }
-    }*/
+        }*/
 
         viewModel.verifyLoationBarcodeValueMutable.observe(this)
         { response ->
@@ -120,16 +138,13 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                     ).show()
                                 }
 
-
                             } catch (e: Exception) {
                                 Toasty.warning(this@PutawayActivity, e.message.toString()).show()
                             }
 
-
                         }
                     }
                 }
-
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { resultResponse ->
@@ -137,7 +152,6 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                         session.showToastAndHandleErrors(resultResponse, this@PutawayActivity)
                     }
                 }
-
                 is Resource.Loading -> {
                     showProgressBar()
                 }
@@ -158,6 +172,10 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                 {
                                     var barcode = resultResponse.responseObject.barcode
                                     if (barcode?.isNotEmpty() == true) {
+                                        if( binding.clTop.visibility==View.GONE)
+                                        {
+                                            binding.clTop.visibility=View.VISIBLE
+                                        }
                                         val existingItem =
                                             stockItemDetails.find { it.barcode == resultResponse.responseObject.barcode }
                                         if (existingItem == null) {
@@ -171,15 +189,6 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                                 )
                                             }
                                             stockPutAway?.let { putAwayList.add(it) }
-                                            /*if (locationCode != "") {
-
-                                            } else {
-                                                Toast.makeText(
-                                                    this@PutawayActivity,
-                                                    "Location is Empty",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-                                            }*/
 
                                         } else {
                                             Toast.makeText(
@@ -198,9 +207,6 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
-
-
-
 
                             } catch (e: Exception) {
                                 Toast.makeText(
@@ -273,11 +279,9 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                         session.showToastAndHandleErrors(resultResponse, this@PutawayActivity)
                     }
                 }
-
                 is Resource.Loading -> {
                     showProgressBar()
                 }
-
                 else -> {}
             }
         }
@@ -287,11 +291,9 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         binding.rcPickList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rcPickList.setHasFixedSize(true)
-
         binding.btnSubmit.setOnClickListener {
             processStockPutAwayList()
         }
-
         if (Build.MANUFACTURER.contains("Zebra Technologies") || Build.MANUFACTURER.contains("Motorola Solutions")) {
             initBarcode()
         }
@@ -325,14 +327,13 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
             }
         }*/
 
-
     //API Call
 
     private fun verifyLoationBarcodeValue(s: String) {
         try {
             viewModel.verifyLoationBarcodeValue(
                 token!!,
-                Constants.BASE_URL,
+                baseUrl,
                 s
             )
         } catch (e: Exception) {
@@ -344,7 +345,7 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
         try {
             viewModel.getStockItemDetailOnBarcode(
                 token!!,
-                Constants.BASE_URL,
+                baseUrl,
                 s
             )
         } catch (e: Exception) {
@@ -360,7 +361,7 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
                 {
                     updateLocationCode(locationCode)
                     viewModel.processStockPutAwayList(
-                        token!!, Constants.BASE_URL,
+                        token!!, baseUrl,
                         ProcessStockPutAwayListRequest(putAwayList)
                     )
                     Log.d("putawaylist",putAwayList.toString())
@@ -523,5 +524,7 @@ class PutawayActivity : AppCompatActivity(), EMDKManager.EMDKListener, Scanner.S
     fun setStatusText(msg: String) {
         Log.e("TAG", "StatusText: $msg")
     }
+
+
 
 }

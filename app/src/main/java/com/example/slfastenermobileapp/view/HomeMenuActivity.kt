@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.slfastenermobileapp.R
 import com.example.slfastenermobileapp.databinding.ActionBarHeaderLayoutBinding
@@ -24,12 +25,14 @@ class HomeMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this, R.layout.activity_home_menu)
 
+        val drawable = ContextCompat.getDrawable(this, R.drawable.first_logo)
+        binding.idLayoutHeader.ivBackOrLogo.setImageDrawable(drawable)
+
         session = SessionManager(this)
         userDetails = session.getUserDetails()
         token = userDetails[Constants.KEY_JWT_TOKEN].toString()
         username = userDetails[Constants.KEY_USER_NAME].toString()
-        binding.idLayoutHeader
-            .profileTXt.setText(username)
+        binding.idLayoutHeader.profileTXt.setText(username)
 
 
         binding.card1.setOnClickListener {

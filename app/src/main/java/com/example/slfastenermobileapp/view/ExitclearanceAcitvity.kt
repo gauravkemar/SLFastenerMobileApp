@@ -14,27 +14,27 @@ class ExitclearanceAcitvity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exitclearance_acitvity)
 
-        val radioButton1 = findViewById<RadioButton>(R.id.radio_button1)
+/*        val radioButton1 = findViewById<RadioButton>(R.id.radio_button1)
         val radioButton = findViewById<RadioButton>(R.id.radio_button)
         val textField1 = findViewById<EditText>(R.id.text_field1)
-        val textField = findViewById<EditText>(R.id.text_field)
+        val textField = findViewById<EditText>(R.id.text_field)*/
 
 
 
 // Set an OnCheckedChangeListener to the radio buttons
-        radioButton1.setOnCheckedChangeListener { buttonView, isChecked ->
+     /*   radioButton1.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 // Set focus to the EditText associated with radioButton1
                 textField1.requestFocus()
             }
-        }
+        }*/
 
-        radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
+       /* radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 // Set focus to the EditText associated with radioButton
                 textField.requestFocus()
             }
-        }
+        }*/
         // Handle RadioButton selection
         }
     }

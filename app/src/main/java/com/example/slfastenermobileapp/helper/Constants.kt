@@ -27,15 +27,14 @@ object Constants {
         const val ROLE_NAME = "roleName"
         const val KEY_JWT_TOKEN = "jwtToken"
         const val KEY_SERVER_IP = "serverIp"
+        const val KEY_HTTP = "http"
         const val KEY_PORT = "port"
         const val HTTP_HEADER_AUTHORIZATION = "Authorization"
         const val SESSION_EXPIRE = "Session Expired ! Please relogin"
 
-
         //const val BASE_URL = "http://103.240.90.141:80/Service/api/"
         //const val BASE_URL = "http://192.168.1.46:5000/api/"
         const val BASE_URL = "http://192.168.1.205:7510/service/api/"
-
 
         const val LOGIN_URL = "UserManagement/authenticate"
         const val GET_STOCK_ITEM_DETAIL_ON_BARCODE = "stock/getStockItemDetailOnBarcode"
@@ -46,6 +45,8 @@ object Constants {
         const val GET_STOCK_ITEM_DETAIL_ON_BARCODESPLIT = "stock/getStockItemDetailOnBarcode"
         const val MERGE_STOCK_ITEMS = "stock/mergeStockItems"
         const val Split_Stock_ITEMS="stock/splitStockItem"
+        const val FILTER_PICK_TRANSACTION="Pick/filterPickTransaction"
+        const val FILTER_SINGLE_PICK="Pick/filterSinglePick"
 
 
 

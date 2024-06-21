@@ -6,6 +6,8 @@ import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralRequst
 import com.example.slfastenermobileapp.model.login.LoginRequest
 import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
+import com.example.slfastenermobileapp.model.picklist.FilterPickTransactionRequest
+import com.example.slfastenermobileapp.model.picklist.FilterSinglePickRequest
 import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
 import com.example.slfastenermobileapp.model.split.SplitStockItemResquest
 import retrofit2.http.Body
@@ -90,5 +92,18 @@ class SLFastenerRepository {
         @Body
         splitStockLineItemRequest: SplitStockItemResquest
     ) = RetrofitInstance.api(baseUrl).splitStockItems(bearerToken,splitStockLineItemRequest)
+
+    suspend fun getFilterPickTransaction(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Body
+        filterPickTransactionRequest: FilterPickTransactionRequest
+    ) = RetrofitInstance.api(baseUrl).getFilterPickTransaction(bearerToken,filterPickTransactionRequest)
+    suspend fun getfilterSinglePick(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION) bearerToken: String,
+        baseUrl: String,
+        @Body
+        filterSinglePickRequst: FilterSinglePickRequest
+    ) = RetrofitInstance.api(baseUrl).getfilterSinglePick(bearerToken,filterSinglePickRequst)
 
 }

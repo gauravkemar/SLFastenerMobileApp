@@ -6,6 +6,8 @@ package  com.example.demorfidapp.api
 
 import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.helper.Constants.BARCODE_GENERATE_WITH_PREFIX
+import com.example.slfastenermobileapp.helper.Constants.FILTER_PICK_TRANSACTION
+import com.example.slfastenermobileapp.helper.Constants.FILTER_SINGLE_PICK
 import com.example.slfastenermobileapp.helper.Constants.LOGIN_URL
 import com.example.slfastenermobileapp.helper.Constants.MERGE_STOCK_ITEMS
 import com.example.slfastenermobileapp.helper.Constants.Split_Stock_ITEMS
@@ -17,6 +19,10 @@ import com.example.slfastenermobileapp.model.login.LoginRequest
 import com.example.slfastenermobileapp.model.login.LoginResponse
 import com.example.slfastenermobileapp.model.merge.GetStockItemDetailsOnBarcodeMerge
 import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
+import com.example.slfastenermobileapp.model.picklist.FilterPickTransactionRequest
+import com.example.slfastenermobileapp.model.picklist.FilterPickTransactionResponse
+import com.example.slfastenermobileapp.model.picklist.FilterSinglePickRequest
+import com.example.slfastenermobileapp.model.picklist.FilterSinglePickResponse
 import com.example.slfastenermobileapp.model.putaway.GetStockItemDetailOnBarcodeResponse
 import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
 import com.example.slfastenermobileapp.model.putaway.VerifyLocationOnBarcodeResponse
@@ -70,8 +76,6 @@ interface SLFastenerAPI {
         @Query("barcodeValue") barcodeValue: String?
     ): Response<GetStockItemDetailsOnBarcodeMerge>
 
-
-
     @POST(MERGE_STOCK_ITEMS)
     suspend fun mergeStockItems
     (
@@ -92,7 +96,6 @@ interface SLFastenerAPI {
         @Query("barcodeValue") barcodeValue: String?
     ): Response<GetStockItemDetailsOnBarcodeSplit>
 
-
     @GET(BARCODE_GENERATE_WITH_PREFIX)
     suspend fun getBarcodeValueWithPrefix
                 (
@@ -106,6 +109,18 @@ interface SLFastenerAPI {
         @Query("transactionPrefix") transactionPrefix: String?
     ): Response<GeneralResponse>
 
+    @GET(FILTER_PICK_TRANSACTION)
+    suspend fun getFilterPickTransaction(
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+            filterPickTransactionRequest: FilterPickTransactionRequest
+    ): Response<ArrayList<FilterPickTransactionResponse>>
+
+    @GET(FILTER_SINGLE_PICK)
+    suspend fun getfilterSinglePick
+                (
+        @Header(Constants.HTTP_HEADER_AUTHORIZATION ) bearerToken: String,
+        filterSinglePickRequst:FilterSinglePickRequest
+    ): Response<ArrayList<FilterSinglePickResponse>>
 
 
 }

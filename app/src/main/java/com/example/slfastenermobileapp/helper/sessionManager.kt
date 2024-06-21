@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.text.Html
 import androidx.appcompat.app.AlertDialog
+import com.example.slfastenermobileapp.helper.Constants.KEY_HTTP
 import com.example.slfastenermobileapp.helper.Constants.KEY_ISLOGGEDIN
 import com.example.slfastenermobileapp.helper.Constants.KEY_JWT_TOKEN
 import com.example.slfastenermobileapp.helper.Constants.KEY_PORT
@@ -118,14 +119,17 @@ class SessionManager(context: Context) {
 
     fun getUserDetails(): HashMap<String, Any?> {
         val user = HashMap<String, Any?>()
+
         user[KEY_USER_NAME] = sharedPrefer.getString(KEY_USER_NAME, null)
         user[KEY_JWT_TOKEN] = sharedPrefer.getString(KEY_JWT_TOKEN, null)
         user[ROLE_NAME] = sharedPrefer.getString(ROLE_NAME, null)
         user[KEY_USER_FIRST_NAME] = sharedPrefer.getString(KEY_USER_FIRST_NAME, null)
         user[KEY_USER_LAST_NAME] = sharedPrefer.getString(KEY_USER_LAST_NAME, null)
         user[KEY_USER_EMAIL] = sharedPrefer.getString(KEY_USER_EMAIL, null)
-        user[KEY_USER_MOBILE_NUMBER] =
-            sharedPrefer.getString(KEY_USER_MOBILE_NUMBER, null)
+        user[KEY_USER_MOBILE_NUMBER] = sharedPrefer.getString(KEY_USER_MOBILE_NUMBER, null)
+        user[KEY_SERVER_IP] = sharedPrefer.getString(KEY_SERVER_IP, null)
+        user[KEY_HTTP] = sharedPrefer.getString(KEY_HTTP, null)
+        user[KEY_PORT] = sharedPrefer.getString(KEY_PORT, null)
 
         return user
     }
@@ -140,12 +144,6 @@ class SessionManager(context: Context) {
         return role ?: ""
     }
 
-    fun saveAdminDetails(serverIp: String?, portNumber: String?) {
-        editor.putString(KEY_SERVER_IP, serverIp)
-        editor.putString(KEY_PORT, portNumber)
-        editor.putBoolean(KEY_ISLOGGEDIN, false)
-        editor.commit()
-    }
 
     fun clearSharedPrefs() {
         editor.clear()
@@ -207,6 +205,12 @@ class SessionManager(context: Context) {
         context.startActivity(intent)
         //context.finish()
         context.finishAfterTransition()
+    }
+    fun saveAdminDetails(serverIp: String?, http:String?) {
+        editor.putString(KEY_SERVER_IP, serverIp)
+        editor.putString(KEY_HTTP, http)
+        editor.putBoolean(KEY_ISLOGGEDIN, false)
+        editor.commit()
     }
 
 

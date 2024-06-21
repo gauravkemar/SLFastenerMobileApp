@@ -4,64 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:background="@drawable/round_border_grey"
-    android:padding="5dp"
-    android:layout_margin="5dp"
+    android:padding="10dp"
+    android:layout_margin="2dp"
     android:layout_height="wrap_content">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-        <TextView
-            android:id="@+id/tvItemCode"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Item Code"
-            android:textSize="14sp"
-            android:textColor="@color/greyString"
-
-            android:textAlignment="textStart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvItemName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-        <TextView
-            android:id="@+id/tvItemName"
-            android:layout_width="0dp"
-            android:textSize="14sp"
-            android:text="Item Name"
-            android:layout_height="wrap_content"
-            android:textColor="@color/greyString"
-
-            android:textAlignment="textStart"
-            app:layout_constraintStart_toEndOf="@+id/tvItemCode"
-            app:layout_constraintEnd_toStartOf="@+id/tvBarcode"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-        <TextView
-            android:id="@+id/tvBarcode"
-            android:layout_width="0dp"
-            android:textSize="14sp"
-            android:text="Item Barcode"
-            android:textColor="@color/greyString"
-
-            android:textAlignment="textStart"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvItemName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clBottom"
-        app:layout_constraintTop_toBottomOf="@+id/clTop"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:layout_height="wrap_content"
@@ -74,9 +23,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="CG239330"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvItemNameValue"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,12 +33,11 @@
         <TextView
             android:id="@+id/tvItemNameValue"
             android:layout_width="0dp"
-            android:textSize="18sp"
+            android:textSize="10sp"
             android:text="SL-FASNEE"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/tvItemCodeValue"
             app:layout_constraintEnd_toStartOf="@+id/tvBarcodeValue"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -98,10 +46,10 @@
         <TextView
             android:id="@+id/tvBarcodeValue"
             android:layout_width="0dp"
-            android:textSize="18sp"
+            android:textSize="10sp"
             android:text="ENA132"
             android:textColor="@color/black"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvItemNameValue"

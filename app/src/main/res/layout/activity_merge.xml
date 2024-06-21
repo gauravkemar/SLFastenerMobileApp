@@ -5,8 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="match_parent">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mvTittle"
@@ -16,7 +16,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_weight="0.15">
-
             <include
                 android:id="@+id/idLayoutHeader"
                 layout="@layout/action_bar_header_layout"
@@ -64,35 +63,19 @@
             android:id="@+id/mvView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mvTittle"
             app:layout_constraintVertical_weight="0.75"
-            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintBottom_toTopOf="@+id/btnBack"
             >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clBodyList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                >
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcScannedMergeList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="visible"
-                    tools:listitem="@layout/merge_list_item_layout"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clBodyNoList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="visible"
                 >
-
                 <ImageView
                     android:id="@+id/imgVw"
                     android:layout_width="match_parent"
@@ -100,11 +83,8 @@
                     android:layout_margin="5dp"
 
                     android:adjustViewBounds="true"
-
                     app:layout_constraintBottom_toTopOf="@+id/DiscTXt"
-
                     app:layout_constraintEnd_toEndOf="parent"
-
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/scan_person" />
                 <!--            android:maxHeight="180dp"-->
@@ -123,17 +103,31 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
+
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgVw" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clBodyList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcScannedMergeList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    tools:listitem="@layout/merge_list_item_layout"
+                    />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnBack"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -141,7 +135,7 @@
             android:textColor="@color/blueBnt"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/clBtns"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:padding="10dp"
-                    android:text="Get print"
+                    android:text="Back"
                     android:textColor="@color/blueBnt"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -175,18 +169,15 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnSubmit">
-
+            app:layout_constraintStart_toEndOf="@+id/btnBack">
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnSubmit2"
                 android:layout_width="match_parent"
                 android:visibility="visible"
                 android:layout_height="match_parent"
-
                 android:textColor="@color/white"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="20dp"
-
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -197,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:padding="10dp"
-                        android:text="merger"
+                        android:text="merge"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -208,7 +199,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnSubmitFinal"
                 android:layout_width="match_parent"
@@ -217,7 +207,6 @@
                 android:textColor="@color/white"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="20dp"
-
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -228,7 +217,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:padding="10dp"
-                        android:text="Create Batches"
+                        android:text="Create Batch"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -236,10 +225,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

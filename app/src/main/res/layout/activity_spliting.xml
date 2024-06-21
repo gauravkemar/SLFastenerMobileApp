@@ -6,12 +6,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".view.SplitingActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mvTittle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,14 +28,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clProdItemDetails"
                 android:layout_width="match_parent"
                 android:background="@drawable/split_round_border_grey"
                 android:padding="5dp"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/idLayoutHeader"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,38 +54,42 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Item Code"
-                        android:textSize="14sp"
-                        android:textColor="@color/greyString"
-
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintHorizontal_weight="0.50"
+                        android:textColor="@color/black"
                         android:textAlignment="textStart"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tvItemName"
+                        app:layout_constraintEnd_toStartOf="@+id/tvTotalQty"
                         app:layout_constraintBottom_toBottomOf="parent"
                         />
                     <TextView
-                        android:id="@+id/tvItemName"
+                        android:id="@+id/tvTotalQty"
                         android:layout_width="0dp"
-                        android:textSize="14sp"
-                        android:text="Item description"
+                        android:textSize="12sp"
+                        android:text="Qty"
+                        android:textStyle="bold"
+                        app:layout_constraintHorizontal_weight="0.25"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/greyString"
-
+                        android:textColor="@color/black"
                         android:textAlignment="textStart"
                         app:layout_constraintStart_toEndOf="@+id/tvItemCode"
-                        app:layout_constraintEnd_toStartOf="@+id/tvBarcode"
+                        app:layout_constraintEnd_toStartOf="@+id/tvBalQty"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
                     <TextView
-                        android:id="@+id/tvBarcode"
+                        android:id="@+id/tvBalQty"
                         android:layout_width="0dp"
-                        android:textSize="14sp"
-                        android:text="Total quality "
-                        android:textColor="@color/greyString"
+                        android:textSize="12sp"
+                        android:text="Bal.Qty"
+                        android:textStyle="bold"
+                        app:layout_constraintHorizontal_weight="0.25"
+                        android:textColor="@color/black"
                         android:textAlignment="textStart"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tvItemName"
+                        app:layout_constraintStart_toEndOf="@+id/tvTotalQty"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
@@ -95,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_margin="5dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/clBalanceQty"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
@@ -106,44 +111,81 @@
                         android:text="CG239330"
                         android:textAlignment="textStart"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        app:layout_constraintHorizontal_weight="0.50"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tvItemNameValue"
+                        app:layout_constraintEnd_toStartOf="@+id/tvTotalQtyValue"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                     <TextView
-                        android:id="@+id/tvItemNameValue"
+                        android:id="@+id/tvTotalQtyValue"
                         android:layout_width="0dp"
-                        android:textSize="18sp"
-                        android:text="SL-FASNEE"
+                        android:textSize="14sp"
+                        android:text="40"
                         android:layout_height="wrap_content"
+                        app:layout_constraintHorizontal_weight="0.25"
                         android:textColor="@color/black"
-
                         android:textAlignment="textStart"
                         app:layout_constraintStart_toEndOf="@+id/tvItemCodeValue"
-                        app:layout_constraintEnd_toStartOf="@+id/tvQuantity"
+                        app:layout_constraintEnd_toStartOf="@+id/tvBalQtyValue"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
                     <TextView
-                        android:id="@+id/tvQuantity"
+                        android:id="@+id/tvBalQtyValue"
                         android:layout_width="0dp"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:text="40"
                         android:textColor="@color/black"
+                        app:layout_constraintHorizontal_weight="0.25"
                         android:textAlignment="textStart"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tvItemNameValue"
+                        app:layout_constraintStart_toEndOf="@+id/tvTotalQtyValue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBalanceQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/clBottomValue"
 
+                    >
+                    <TextView
+                        android:id="@+id/tvItemDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Item Code-Desc"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textAlignment="textStart"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/tvItemCodeDesc"
+                        />
+                    <TextView
+                        android:id="@+id/tvItemCodeDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:padding="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="5dp"
+                        android:text="asdsadsadadsadadsadadsdaddouasgdioasdiasudadhaidhadiahaihdsiadhaiduhadishaidhdiashdaishdaidhadiuhsasdsadasdsadsadadasdada"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toBottomOf="@+id/tvItemDesc"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clBodyNoList"
             android:layout_width="match_parent"
@@ -174,7 +216,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/DiscTXt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/scan_person" />
+                    app:srcCompat="@drawable/split_screen_deafult" />
                 <TextView
                     android:id="@+id/DiscTXt"
                     android:layout_width="wrap_content"
@@ -182,7 +224,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginTop="192dp"
                     android:padding="10dp"
-                    android:text="Scan the box/item \n which you want to merger"
+                    android:text="Scan the box/item \n which you want to Split"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -219,7 +261,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:clickable="true"
-                    app:cardCornerRadius="15dp"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     >
@@ -233,13 +275,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_add_blue"
-                            android:padding="5dp"
+                            android:padding="10dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/tvNewLineItem"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
+                 <!--       <TextView
                             android:id="@+id/tvNewLineItem"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -250,7 +292,7 @@
                             android:textColor="@color/blue"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/ivAddNewLineItem"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent" />-->
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -273,10 +315,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:strokeColor="@color/blueBnt"
+
                 android:textColor="@color/blueBnt"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
                 app:layout_constraintStart_toStartOf="parent"
@@ -293,6 +336,7 @@
                         android:layout_margin="5dp"
                         android:padding="10dp"
                         android:text="Get print"
+
                         android:textColor="@color/blueBnt"
                         android:textSize="14sp"
                         android:textStyle="bold"

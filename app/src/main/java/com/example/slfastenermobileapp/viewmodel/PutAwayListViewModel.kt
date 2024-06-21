@@ -1,4 +1,4 @@
-package com.example.slfastenermobileapp.viewmodel.login
+package com.example.slfastenermobileapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

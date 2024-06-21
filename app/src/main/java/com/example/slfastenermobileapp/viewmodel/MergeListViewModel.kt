@@ -1,4 +1,4 @@
-package com.example.slfastenermobileapp.viewmodel.login
+package com.example.slfastenermobileapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -10,8 +10,6 @@ import com.example.slfastenermobileapp.helper.Constants
 import com.example.slfastenermobileapp.model.generalresponserequest.GeneralResponse
 import com.example.slfastenermobileapp.model.merge.GetStockItemDetailsOnBarcodeMerge
 import com.example.slfastenermobileapp.model.merge.MergeStockLineItemRequest
-import com.example.slfastenermobileapp.model.putaway.GetStockItemDetailOnBarcodeResponse
-import com.example.slfastenermobileapp.model.putaway.ProcessStockPutAwayListRequest
 import com.example.slfastenermobileapp.repository.SLFastenerRepository
 import kotlinx.coroutines.launch
 import org.json.JSONObject

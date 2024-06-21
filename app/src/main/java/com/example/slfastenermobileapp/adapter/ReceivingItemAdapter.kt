@@ -10,14 +10,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slfastenermobileapp.R
 import com.example.slfastenermobileapp.model.merge.StockItemResponse
-import com.example.slfastenermobileapp.view.MergeActivity
 
-class MergeStockItemListAdapter(
+class ReceivingItemAdapter (
     private val context: Context,
     private val stockItemList: MutableList<StockItemResponse>,
     private val onDelete: (Int, StockItemResponse) -> Unit,
 ) :
-    RecyclerView.Adapter<MergeStockItemListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ReceivingItemAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,8 +32,8 @@ class MergeStockItemListAdapter(
         holder.tvItemQtyValue.setText(stockItemMod.stockQty.toString())
         holder.delIcon.setOnClickListener {
             onDelete(position,stockItemMod)
-  /*          stockItemList.removeAt(position)
-            notifyItemRangeChanged(position,stockItemList.size)*/
+            /*          stockItemList.removeAt(position)
+                      notifyItemRangeChanged(position,stockItemList.size)*/
         }
         holder.tvItemDescValue.setText("${stockItemMod.itemCode} - ${stockItemMod.description}")
         if(stockItemMod.isSaved)
@@ -47,11 +46,11 @@ class MergeStockItemListAdapter(
         }
         if(stockItemMod.isMerged)
         {
-            holder.delIcon.visibility=View.GONE
+            holder.delIcon.visibility= View.GONE
         }
         else
         {
-            holder.delIcon.visibility=View.VISIBLE
+            holder.delIcon.visibility= View.VISIBLE
         }
     }
 

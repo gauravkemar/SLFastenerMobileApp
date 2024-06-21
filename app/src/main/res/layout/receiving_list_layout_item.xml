@@ -12,12 +12,7 @@
         android:layout_height="1dp"
         android:background="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"/>
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topCard"
@@ -42,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="item code"
+                android:text="item barcode"
 
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
@@ -75,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/clTop3"
+            app:layout_constraintEnd_toStartOf="@+id/checkBox"
 
             app:layout_constraintStart_toEndOf="@+id/clTop"
             app:layout_constraintTop_toTopOf="parent">
@@ -109,47 +104,14 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clTop3"
-            android:layout_width="0dp"
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/clTop2"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <TextView
-                android:id="@+id/cusNamLbl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="item barcode"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toTopOf="@+id/cumNamVal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/cumNamVal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:padding="5dp"
-                android:text="US5463"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

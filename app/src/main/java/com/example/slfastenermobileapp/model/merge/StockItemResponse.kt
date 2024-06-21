@@ -1,6 +1,6 @@
-package com.example.slfastenermobileapp.model.putaway
+package com.example.slfastenermobileapp.model.merge
 
-data class ResponseObjectX(
+data class StockItemResponse(
     val barcode: String?,
     val blockedQty: Double?,
     val description: String?,
@@ -32,4 +32,6 @@ data class ResponseObjectX(
     val stockQty: Int,
     val supplierBatchNo: String?,
     val uom: String?,
+    var isSaved:Boolean,
+    var isMerged:Boolean
 )
